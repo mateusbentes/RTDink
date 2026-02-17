@@ -99,6 +99,7 @@ GamepadManager * GetGamepadManager() {return &g_gamepadManager;}
 
 #if defined RT_WEBOS || defined RTLINUX
 #include "Audio/AudioManagerSDL.h"
+  #include "Gamepad/GamepadProviderSDL2.h"
   AudioManagerSDL g_audioManager; //sound in windows and WebOS
   //AudioManager g_audioManager; //to disable sound
 #elif defined ANDROID_NDK
@@ -647,6 +648,10 @@ bool App::Init()
 	pTempDirectX->SetIgnoreXInputCapableDevices(true);
 	GetGamepadManager()->AddProvider(pTempDirectX); //use directx joysticks
 	#endif
+
+#if defined(RTLINUX) || defined(PLATFORM_LINUX)
+	GetGamepadManager()->AddProvider(new GamepadProviderSDL2());
+#endif
 
     if (GetVar("check_icade")->GetUINT32() != 0)
 	{

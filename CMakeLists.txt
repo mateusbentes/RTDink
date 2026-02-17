@@ -79,6 +79,8 @@ set(PROTON_SOURCES
     ${PROTON}/Gamepad/GamepadProvider.cpp
     ${PROTON}/Gamepad/GamepadProvideriCade.cpp
     ${PROTON}/Gamepad/GamepadiCade.cpp
+    ${PROTON}/Gamepad/GamepadProviderSDL2.cpp
+    ${PROTON}/Gamepad/GamepadSDL2.cpp
     ${PROTON}/ClanLib-2.0/Sources/Core/Math/angle.cpp
     ${PROTON}/ClanLib-2.0/Sources/Core/Math/mat3.cpp
     ${PROTON}/ClanLib-2.0/Sources/Core/Math/mat4.cpp
