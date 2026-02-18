@@ -38,6 +38,8 @@ bin/*
 bin/dink/quicksave.dat
 bin/dink/continue_state.dat
 bin/dink/save*.dat
+bin/dink/autosave.dat
+bin/dink/autosavedb.dat
 bin/dmods/
 bin/log.txt
 bin/save.dat

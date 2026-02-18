@@ -1,0 +1,42 @@
+{
+  "app-id": "com.rtsoft.DinkSmallwoodHD",
+  "runtime": "org.freedesktop.Platform",
+  "runtime-version": "24.08",
+  "sdk": "org.freedesktop.Sdk",
+  "command": "dink-smallwood-hd",
+  "finish-args": [
+    "--share=ipc",
+    "--socket=fallback-x11",
+    "--socket=wayland",
+    "--socket=pulseaudio",
+    "--device=dri",
+    "--share=network"
+  ],
+  "modules": [
+    {
+      "name": "dink-smallwood-hd",
+      "buildsystem": "cmake-ninja",
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release"
+      ],
+      "post-install": [
+        "install -Dm755 flatpak/dink-smallwood-hd.sh /app/bin/dink-smallwood-hd",
+        "install -Dm644 flatpak/com.rtsoft.DinkSmallwoodHD.desktop /app/share/applications/com.rtsoft.DinkSmallwoodHD.desktop",
+        "install -Dm644 flatpak/com.rtsoft.DinkSmallwoodHD.metainfo.xml /app/share/metainfo/com.rtsoft.DinkSmallwoodHD.metainfo.xml",
+        "install -Dm644 flatpak/com.rtsoft.DinkSmallwoodHD.png /app/share/icons/hicolor/512x512/apps/com.rtsoft.DinkSmallwoodHD.png"
+      ],
+      "sources": [
+        {
+          "type": "dir",
+          "path": ".."
+        },
+        {
+          "type": "git",
+          "url": "https://github.com/SethRobinson/proton.git",
+          "commit": "406ab720368fcd17ace6fc671e0c8335faafcc64",
+          "dest": "proton"
+        }
+      ]
+    }
+  ]
+}
