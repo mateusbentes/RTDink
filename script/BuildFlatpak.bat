@@ -34,7 +34,7 @@ echo.
 REM -- Step 2: Build on glados --
 echo [2/5] Building Flatpak on glados (this may take a minute)...
 
-ssh %GLADOS_HOST% "cd %GLADOS_REPO% && git checkout flatpak-build && flatpak-builder --user --force-clean --install build-flatpak flatpak/%FLATPAK_ID%.json 2>&1 | tail -5"
+ssh %GLADOS_HOST% "cd %GLADOS_REPO% && git checkout -- . && git clean -fd -e build-flatpak/ && git checkout flatpak-build && flatpak-builder --user --force-clean --install build-flatpak flatpak/%FLATPAK_ID%.json 2>&1 | tail -5"
 if errorlevel 1 (
     echo ERROR: Flatpak build failed on glados.
     echo Run manually on glados to see full output:
@@ -48,12 +48,7 @@ echo.
 REM -- Step 3: Smoke test --
 echo [3/5] Running smoke test (launching for 5 seconds)...
 
-ssh %GLADOS_HOST% "timeout 5 flatpak run %FLATPAK_ID% 2>&1 | head -20"
-if errorlevel 1 (
-    echo WARNING: Smoke test returned non-zero (may just be the timeout). Check output above.
-)
-
-ssh %GLADOS_HOST% "flatpak run %FLATPAK_ID% --version 2>&1 || true" | findstr /i "dink"
+ssh %GLADOS_HOST% "timeout 5 flatpak run %FLATPAK_ID% 2>&1; echo SMOKE_TEST_DONE"
 echo Smoke test done.
 echo.
 

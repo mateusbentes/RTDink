@@ -6,7 +6,15 @@ Visit https://www.rtsoft.com/pages/dink.php for installers for Windows, Mac, iOS
 
 Also mirrored on The Dink Network: https://www.dinknetwork.com/file/dink_smallwood_hd/
 
-**Linux?** Install and play with a single command (Ubuntu/Debian/Fedora/Arch/openSUSE/Alpine):
+**Linux (Flatpak)?** Install on any distro:
+
+```bash
+sudo apt install flatpak  # or your distro's package manager
+wget https://www.rtsoft.com/dink/DinkSmallwoodHD.flatpak && flatpak install DinkSmallwoodHD.flatpak
+flatpak run com.rtsoft.DinkSmallwoodHD
+```
+
+**Linux (build from source)?** Single command setup (Ubuntu/Debian/Fedora/Arch/openSUSE/Alpine):
 
 ```bash
 curl -sL https://raw.githubusercontent.com/SethRobinson/RTDink/master/linux_setup.sh | bash
@@ -37,7 +45,27 @@ All platforms need the **Dink Smallwood game data** (`dink/` directory) to actua
 
 ## Linux
 
-The fastest way to get up and running on Linux (Ubuntu/Debian):
+### Flatpak (easiest)
+
+Install Flatpak if you don't have it, then install the game:
+
+```bash
+# Install Flatpak (skip if already installed)
+sudo apt install flatpak                          # Debian/Ubuntu
+sudo dnf install flatpak                          # Fedora
+sudo pacman -S flatpak                            # Arch
+
+# Download and install Dink Smallwood HD
+wget https://www.rtsoft.com/dink/DinkSmallwoodHD.flatpak
+flatpak install DinkSmallwoodHD.flatpak
+
+# Run
+flatpak run com.rtsoft.DinkSmallwoodHD
+```
+
+### Build from source
+
+The fastest way to build from source on Linux:
 
 ```bash
 curl -sL https://raw.githubusercontent.com/SethRobinson/RTDink/master/linux_setup.sh | bash

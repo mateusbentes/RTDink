@@ -17,7 +17,9 @@
       "name": "dink-smallwood-hd",
       "buildsystem": "cmake-ninja",
       "config-opts": [
-        "-DCMAKE_BUILD_TYPE=Release"
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DCMAKE_CXX_FLAGS=-Wno-unused-result",
+        "-DCMAKE_C_FLAGS=-Wno-unused-result"
       ],
       "post-install": [
         "install -Dm755 flatpak/dink-smallwood-hd.sh /app/bin/dink-smallwood-hd",
@@ -33,7 +35,7 @@
         {
           "type": "git",
           "url": "https://github.com/SethRobinson/proton.git",
-          "commit": "406ab720368fcd17ace6fc671e0c8335faafcc64",
+          "commit": "16b16b193ab80d75bb0e70c1237582373c9493fb",
           "dest": "proton"
         }
       ]
