@@ -692,7 +692,15 @@ bool App::Init()
 	UpdateVideoSettings();
 	
 	g_audioManager.SetDLS("dink/midi/GeneralUser GS 1.471_With Chaos Drums.dls");
-	
+
+#ifdef RTLINUX
+	if (!getenv("SDL_SOUNDFONTS"))
+	{
+		string sf = GetBaseAppPath() + "dink/midi/TimGM6mb.sf2";
+		setenv("SDL_SOUNDFONTS", sf.c_str(), 0);
+	}
+#endif
+
 #ifdef _WIN32
 
 	//temporary while I make movies
