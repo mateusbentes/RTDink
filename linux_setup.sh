@@ -6,9 +6,7 @@
 #   1. Clone RTDink (if not already in the repo)
 #   2. Install required dependencies (auto-detects package manager)
 #   3. Clone the Proton SDK
-#   4. Build RTDink
-#   5. Download game data and compiled assets from the Windows release
-#   6. Assemble everything into bin/ ready to play
+#   4. Build RTDink (binary goes to bin/ where game assets already live)
 #
 # Supported distros: Debian/Ubuntu, Fedora/RHEL, Arch/Manjaro, openSUSE, Alpine
 #
@@ -16,8 +14,7 @@
 #   curl -sL https://raw.githubusercontent.com/SethRobinson/RTDink/master/linux_setup.sh | bash
 #
 # Or from within the repo:
-#   ./linux_setup.sh            # full setup (build + game data)
-#   ./linux_setup.sh --no-data  # build only, skip game data download
+#   ./linux_setup.sh
 #
 
 set -e
@@ -54,7 +51,6 @@ detect_pkg_manager() {
 }
 
 # Install packages using the detected package manager
-# Usage: pkg_install pkg1 pkg2 ...
 pkg_install() {
     case "$PKG_MANAGER" in
         apt)
@@ -78,15 +74,14 @@ pkg_install() {
             ;;
         *)
             error "No supported package manager found (tried apt, dnf, yum, pacman, zypper, apk)."
-            error "Please install the following packages manually, then re-run with --no-data or after installing deps:"
+            error "Please install the following packages manually:"
             error "  C/C++ compiler, cmake, OpenGL dev libs, X11 dev libs, libpng, zlib, bzip2,"
-            error "  libcurl, SDL2, SDL2_mixer, 7zip/p7zip"
+            error "  libcurl, SDL2, SDL2_mixer"
             exit 1
             ;;
     esac
 }
 
-# Return the list of packages needed for this distro's package manager
 get_build_packages() {
     case "$PKG_MANAGER" in
         apt)
@@ -107,18 +102,6 @@ get_build_packages() {
     esac
 }
 
-# Return the 7zip package name for this distro
-get_7zip_package() {
-    case "$PKG_MANAGER" in
-        apt)     echo "p7zip-full" ;;
-        dnf|yum) echo "p7zip p7zip-plugins" ;;
-        pacman)  echo "p7zip" ;;
-        zypper)  echo "p7zip-full" ;;
-        apk)     echo "7zip" ;;
-    esac
-}
-
-# Return the git package name (always "git" but keeps the pattern consistent)
 get_git_package() {
     echo "git"
 }
@@ -128,15 +111,12 @@ detect_pkg_manager
 # ---------------------------------------------------------------------------
 # Parse arguments
 # ---------------------------------------------------------------------------
-SKIP_DATA=false
 INSTALL_DIR="$HOME/RTDink"
 for arg in "$@"; do
     case $arg in
-        --no-data) SKIP_DATA=true ;;
         --dir=*) INSTALL_DIR="${arg#*=}" ;;
         --help|-h)
-            echo "Usage: $0 [--no-data] [--dir=PATH]"
-            echo "  --no-data    Skip downloading game data (build only)"
+            echo "Usage: $0 [--dir=PATH]"
             echo "  --dir=PATH   Install directory (default: ~/RTDink)"
             echo ""
             echo "One-liner install:"
@@ -165,7 +145,6 @@ if [ ! -f "CMakeLists.txt" ] || [ ! -d "source" ]; then
         cd "$INSTALL_DIR"
         git pull || warn "git pull failed (local changes or network issue?), continuing with existing files..."
     elif [ -d "$INSTALL_DIR" ] && [ -n "$(ls -A "$INSTALL_DIR" 2>/dev/null)" ]; then
-        # Directory exists and is not empty, but has no .git
         if [ -f "$INSTALL_DIR/CMakeLists.txt" ] && [ -d "$INSTALL_DIR/source" ]; then
             warn "Directory $INSTALL_DIR contains RTDink files but no .git directory."
             warn "Proceeding with existing files (no git pull possible)..."
@@ -181,17 +160,12 @@ if [ ! -f "CMakeLists.txt" ] || [ ! -d "source" ]; then
         git clone https://github.com/SethRobinson/RTDink.git "$INSTALL_DIR"
         cd "$INSTALL_DIR"
     fi
-
-    # Fall through — continue running the current script from inside the repo
-    # (Don't exec the local copy; it may be outdated if git pull failed)
 fi
 
 # Determine the repo root directory
 if [ "$BOOTSTRAPPED" = true ]; then
-    # We cd'd into the repo during bootstrap — use current directory
     SCRIPT_DIR="$(pwd)"
 else
-    # Running directly from within the repo — use script's own location
     SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 fi
 cd "$SCRIPT_DIR"
@@ -199,7 +173,6 @@ cd "$SCRIPT_DIR"
 # Offer to pull latest RTDink changes when running from inside an existing checkout
 if [ -d ".git" ]; then
     if [ -t 0 ]; then
-        # Interactive terminal — ask the user
         echo -en "${GREEN}[INFO]${NC} Git repo detected. Pull latest RTDink changes before building? [y/N] "
         read -r answer
         if [ "$answer" = "y" ] || [ "$answer" = "Y" ]; then
@@ -231,12 +204,6 @@ fi
 info "Installing build dependencies..."
 pkg_install $BUILD_PACKAGES
 
-# For game data extraction (optional, only needed if downloading game data)
-if [ "$SKIP_DATA" = false ] && ! command -v 7z >/dev/null 2>&1; then
-    info "Installing 7zip (needed to extract game data from Windows installer)..."
-    pkg_install $(get_7zip_package)
-fi
-
 # ---------------------------------------------------------------------------
 # Step 2: Clone Proton SDK
 # ---------------------------------------------------------------------------
@@ -251,7 +218,7 @@ else
 fi
 
 # ---------------------------------------------------------------------------
-# Step 3: Build
+# Step 3: Build (binary goes directly to bin/)
 # ---------------------------------------------------------------------------
 info "Step 3: Building RTDink..."
 
@@ -264,106 +231,20 @@ cd ..
 info "Build complete!"
 
 # ---------------------------------------------------------------------------
-# Step 4: Assemble bin/ directory
-# ---------------------------------------------------------------------------
-info "Step 4: Setting up bin/ directory..."
-
-mkdir -p "$BIN_DIR"
-
-# Copy the binary
-cp build/RTDinkApp "$BIN_DIR/"
-
-# ---------------------------------------------------------------------------
-# Step 5: Download game data and compiled assets
-# ---------------------------------------------------------------------------
-if [ "$SKIP_DATA" = true ]; then
-    info "Skipping game data download (--no-data flag)."
-    echo ""
-    info "To play, you need the dink/, interface/, and audio/ directories in: $BIN_DIR/"
-    info "You can extract them from the Windows installer at: https://www.rtsoft.com/pages/dink.php"
-    echo ""
-    info "Then run:  cd $BIN_DIR && ./RTDinkApp"
-    exit 0
-fi
-
-if [ -d "$BIN_DIR/dink" ] && [ -f "$BIN_DIR/dink/dink.dat" ]; then
-    info "Game data already present in bin/dink/ directory."
-else
-    info "Step 5: Downloading Dink Smallwood HD game data and compiled assets..."
-
-    INSTALLER_URL="https://www.rtsoft.com/dink/DinkSmallwoodHDInstaller.exe"
-    TEMP_DIR=$(mktemp -d)
-
-    if command -v wget >/dev/null 2>&1; then
-        DOWNLOAD_CMD="wget -q --show-progress -O"
-    elif command -v curl >/dev/null 2>&1; then
-        DOWNLOAD_CMD="curl -L -o"
-    else
-        error "Neither wget nor curl found. Please install one and re-run."
-        exit 1
-    fi
-
-    info "Downloading from $INSTALLER_URL ..."
-    if $DOWNLOAD_CMD "$TEMP_DIR/dink_installer.exe" "$INSTALLER_URL"; then
-        info "Extracting installer..."
-        cd "$TEMP_DIR"
-        7z x -y dink_installer.exe -oextracted >/dev/null 2>&1 || true
-        cd "$SCRIPT_DIR"
-
-        # Find the extracted root (NSIS extracts to $INSTDIR or directly)
-        EXTRACT_ROOT=""
-        if [ -d "$TEMP_DIR/extracted/dink" ]; then
-            EXTRACT_ROOT="$TEMP_DIR/extracted"
-        elif [ -d "$TEMP_DIR/extracted/\$INSTDIR/dink" ]; then
-            EXTRACT_ROOT="$TEMP_DIR/extracted/\$INSTDIR"
-        else
-            # Search for dink.dat to find the root
-            DINK_DAT=$(find "$TEMP_DIR/extracted" -name "dink.dat" -type f 2>/dev/null | head -1)
-            if [ -n "$DINK_DAT" ]; then
-                EXTRACT_ROOT=$(dirname "$(dirname "$DINK_DAT")")
-            fi
-        fi
-
-        if [ -n "$EXTRACT_ROOT" ] && [ -d "$EXTRACT_ROOT/dink" ]; then
-            # Copy game data and compiled assets directly into bin/
-            for dir in dink interface audio; do
-                if [ -d "$EXTRACT_ROOT/$dir" ]; then
-                    info "Copying $dir/ to bin/..."
-                    rm -rf "$BIN_DIR/$dir"
-                    cp -r "$EXTRACT_ROOT/$dir" "$BIN_DIR/$dir"
-                fi
-            done
-            info "Game data and assets installed successfully!"
-        else
-            warn "Could not locate game data in the downloaded installer."
-            warn "The installer was saved to: $TEMP_DIR/dink_installer.exe"
-            warn "Extract the dink/, interface/, and audio/ folders into: $BIN_DIR/"
-        fi
-
-        # Clean up temp files (but not if we failed to find data)
-        if [ -d "$BIN_DIR/dink" ] && [ -f "$BIN_DIR/dink/dink.dat" ]; then
-            rm -rf "$TEMP_DIR"
-        fi
-    else
-        warn "Download failed. You can manually download the game data from:"
-        warn "  https://www.rtsoft.com/pages/dink.php"
-        warn "Extract the dink/, interface/, and audio/ folders into: $BIN_DIR/"
-        rm -rf "$TEMP_DIR"
-    fi
-fi
-
-# ---------------------------------------------------------------------------
-# Done!
+# Verify and report
 # ---------------------------------------------------------------------------
 echo ""
-if [ -d "$BIN_DIR/dink" ] && [ -f "$BIN_DIR/dink/dink.dat" ]; then
+if [ -f "$BIN_DIR/RTDinkApp" ] && [ -d "$BIN_DIR/dink" ] && [ -f "$BIN_DIR/dink/dink.dat" ]; then
     info "Setup complete! Dink Smallwood HD is ready to play."
     echo ""
     echo "    cd $BIN_DIR && ./RTDinkApp"
     echo ""
 else
-    info "Build complete, but game data is missing."
-    info "Download from https://www.rtsoft.com/pages/dink.php"
-    info "Extract the dink/, interface/, and audio/ folders into: $BIN_DIR/"
-    info "Then run:  cd $BIN_DIR && ./RTDinkApp"
+    if [ ! -f "$BIN_DIR/RTDinkApp" ]; then
+        error "Build failed — RTDinkApp binary not found in $BIN_DIR/"
+    fi
+    if [ ! -d "$BIN_DIR/dink" ] || [ ! -f "$BIN_DIR/dink/dink.dat" ]; then
+        error "Game data not found in $BIN_DIR/dink/"
+        error "This shouldn't happen — the game data is included in the repo."
+    fi
 fi
