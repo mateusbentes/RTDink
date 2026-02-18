@@ -129,21 +129,11 @@ set(EXTRA_LIBS pthread X11 ${OPENGL_LIBRARIES} ${PNG_LIBRARIES} ${ZLIB_LIBRARIES
 
 target_link_libraries(RTDinkApp ${EXTRA_LIBS})
 
-# Create symlinks so the binary can find resources when run from build/
-add_custom_command(TARGET RTDinkApp POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E create_symlink
-        ${CMAKE_SOURCE_DIR}/media/interface
-        ${CMAKE_BINARY_DIR}/interface
-    COMMAND ${CMAKE_COMMAND} -E create_symlink
-        ${CMAKE_SOURCE_DIR}/media/audio
-        ${CMAKE_BINARY_DIR}/audio
-)
+# Output binary to bin/ where game assets already live
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
-# Symlink dink/ game data if it exists in the project root
-if(EXISTS ${CMAKE_SOURCE_DIR}/dink)
-    add_custom_command(TARGET RTDinkApp POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E create_symlink
-            ${CMAKE_SOURCE_DIR}/dink
-            ${CMAKE_BINARY_DIR}/dink
-    )
-endif()
+# Install rules (used by Flatpak and system-wide installs)
+install(TARGETS RTDinkApp DESTINATION bin)
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/bin/interface DESTINATION share/com.rtsoft.DinkSmallwoodHD)
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/bin/audio DESTINATION share/com.rtsoft.DinkSmallwoodHD)
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/bin/dink DESTINATION share/com.rtsoft.DinkSmallwoodHD)
