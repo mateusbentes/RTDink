@@ -1,1 +1,13 @@
 *.sh text eol=lf
+
+# Binary game data files — must not have line endings converted
+*.d binary
+*.ff binary
+*.dat binary
+*.bmp binary
+*.wav binary
+*.ogg binary
+*.mid binary
+*.mp3 binary
+*.rttex binary
+*.rtfont binary
