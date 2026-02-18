@@ -215,3 +215,5 @@ proton/
 
 
 script/DinkSmallwoodHD.flatpak
+script/DinkSmallwoodHD-aarch64.flatpak
+script/DinkSmallwoodHD-x86_64.flatpak

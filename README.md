@@ -17,11 +17,13 @@ This clones the repo, installs dependencies, builds from source, and downloads t
 **Linux (Flatpak)?** Install on any distro:
 
 ```bash
-sudo apt install flatpak  # if you don't have it.  Replace apt with apt (debian) or dnf (fedora)
-wget https://www.rtsoft.com/dink/DinkSmallwoodHD.flatpak #download it
-flatpak install --user DinkSmallwoodHD.flatpak #install it
-flatpak run com.rtsoft.DinkSmallwoodHD #actually play it
+sudo apt install flatpak  # if you don't have it.  Replace apt with dnf (Fedora) or your distro's package manager.
+wget https://www.rtsoft.com/dink/DinkSmallwoodHD-x86_64.flatpak
+flatpak install --user DinkSmallwoodHD-x86_64.flatpak
+flatpak run com.rtsoft.DinkSmallwoodHD
 ```
+
+(If on an ARM platform, use `DinkSmallwoodHD-aarch64.flatpak` instead: `wget https://www.rtsoft.com/dink/DinkSmallwoodHD-aarch64.flatpak` then `flatpak install --user DinkSmallwoodHD-aarch64.flatpak`.)
 
 ## Building from source
 
