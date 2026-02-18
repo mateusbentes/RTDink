@@ -116,6 +116,9 @@ set_source_files_properties(
     PROPERTIES COMPILE_FLAGS "-Wno-incompatible-pointer-types"
 )
 
+# Output binary to bin/ where game assets already live
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+
 # Executable
 add_executable(RTDinkApp ${RTDINK_SOURCES} ${PROTON_SOURCES})
 
@@ -128,9 +131,6 @@ find_package(BZip2 REQUIRED)
 set(EXTRA_LIBS pthread X11 ${OPENGL_LIBRARIES} ${PNG_LIBRARIES} ${ZLIB_LIBRARIES} ${BZIP2_LIBRARIES} curl SDL2 SDL2_mixer)
 
 target_link_libraries(RTDinkApp ${EXTRA_LIBS})
-
-# Output binary to bin/ where game assets already live
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 # Install rules (used by Flatpak and system-wide installs)
 install(TARGETS RTDinkApp DESTINATION bin)
