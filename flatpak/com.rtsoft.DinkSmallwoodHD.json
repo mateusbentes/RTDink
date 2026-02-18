@@ -63,8 +63,8 @@
       "buildsystem": "cmake-ninja",
       "config-opts": [
         "-DCMAKE_BUILD_TYPE=Release",
-        "-DCMAKE_CXX_FLAGS=-Wno-unused-result",
-        "-DCMAKE_C_FLAGS=-Wno-unused-result"
+        "-DCMAKE_CXX_FLAGS=-Wno-unused-result -I/usr/include/SDL2",
+        "-DCMAKE_C_FLAGS=-Wno-unused-result -I/usr/include/SDL2"
       ],
       "post-install": [
         "install -Dm755 flatpak/dink-smallwood-hd.sh /app/bin/dink-smallwood-hd",
