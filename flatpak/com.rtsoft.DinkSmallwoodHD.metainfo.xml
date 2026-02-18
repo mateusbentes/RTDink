@@ -44,9 +44,14 @@
   <screenshots>
     <screenshot type="default">
       <caption>Dink explores the overworld</caption>
-      <image>https://raw.githubusercontent.com/SethRobinson/RTDink/master/flatpak/screenshots/screenshot1.png</image>
+      <image>https://raw.githubusercontent.com/SethRobinson/RTDink/v2.08/flatpak/screenshots/screenshot1.png</image>
     </screenshot>
   </screenshots>
+
+  <branding>
+    <color type="primary" scheme_preference="light">#c8a84e</color>
+    <color type="primary" scheme_preference="dark">#3d2415</color>
+  </branding>
 
   <content_rating type="oars-1.1">
     <content_attribute id="violence-fantasy">moderate</content_attribute>
