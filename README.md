@@ -32,7 +32,7 @@ RTDink can be built for multiple platforms. Each uses the [Proton SDK](https://g
 | Platform | Build System | Quick Start |
 |----------|-------------|-------------|
 | **Windows** | Visual Studio 2017+ | See [detailed Windows instructions](#windows) below |
-| **Linux** | CMake + SDL2 | `git clone ... && ./linux_setup.sh` ([details](#linux)) |
+| **Linux** | CMake + SDL2 | `git clone ... && ./linux_setup.sh` ([details](INSTALL.md#linux)) |
 | **macOS** | Xcode | Broken/unmaintained -- see [INSTALL.md](INSTALL.md#macos) |
 | **HTML5** | Emscripten | See [Proton HTML5 setup](https://www.rtsoft.com/wiki/doku.php?id=proton:html5_setup) |
 | **iOS** | Xcode | Proton SDK sibling layout, open `RTDink.xcodeproj` ([more info](INSTALL.md#ios)) |

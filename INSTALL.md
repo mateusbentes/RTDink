@@ -13,7 +13,7 @@ See [README.md](README.md) for download links if you just want to play the game.
 | **macOS** | Xcode | Broken/unmaintained |
 | **HTML5** | Emscripten | See [Proton HTML5 setup](https://www.rtsoft.com/wiki/doku.php?id=proton:html5_setup) |
 
-All platforms require the **Dink Smallwood game data** (`dink/` directory) to play. See [README.md](README.md#game-data-requirement) for how to obtain it.
+All platforms require the **Dink Smallwood game data** (`dink/` directory) to play. See [README.md](README.md#just-want-to-play) for how to obtain it.
 
 Most platforms (except Linux) expect the **Proton SDK sibling layout** -- RTDink is cloned inside the Proton directory:
 
