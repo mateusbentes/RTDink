@@ -13,6 +13,29 @@ echo  Dink Smallwood HD - Flatpak Builder
 echo ============================================
 echo.
 
+REM -- Step 0: Make sure glados has the repo and flatpak tools --
+ssh %GLADOS_HOST% "test -d %GLADOS_REPO%/.git" >NUL 2>&1
+if errorlevel 1 (
+    echo [0/5] RTDink repo not found on glados, cloning...
+    ssh %GLADOS_HOST% "git clone https://github.com/SethRobinson/RTDink.git %GLADOS_REPO% && git -C %GLADOS_REPO% config user.email 'seth@rtsoft.com' && git -C %GLADOS_REPO% config user.name 'Seth Robinson'"
+    if errorlevel 1 (
+        echo ERROR: Failed to clone repo on glados.
+        pause
+        exit /b 1
+    )
+)
+
+ssh %GLADOS_HOST% "command -v flatpak-builder" >NUL 2>&1
+if errorlevel 1 (
+    echo [0/5] Installing flatpak-builder on glados...
+    ssh %GLADOS_HOST% "sudo apt-get update && sudo apt-get install -y flatpak flatpak-builder && flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo && flatpak install --user -y flathub org.freedesktop.Platform//24.08 org.freedesktop.Sdk//24.08"
+    if errorlevel 1 (
+        echo ERROR: Failed to install flatpak tools on glados.
+        pause
+        exit /b 1
+    )
+)
+
 REM -- Step 1: Push current repo to glados --
 echo [1/5] Pushing current repo to glados...
 

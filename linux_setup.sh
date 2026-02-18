@@ -235,7 +235,7 @@ info "Build complete!"
 # ---------------------------------------------------------------------------
 echo ""
 if [ -f "$BIN_DIR/RTDinkApp" ] && [ -d "$BIN_DIR/dink" ] && [ -f "$BIN_DIR/dink/dink.dat" ]; then
-    info "Setup complete! Dink Smallwood HD is ready to play."
+    info "Setup complete! To play, run the game like this:"
     echo ""
     echo "    cd $BIN_DIR && ./RTDinkApp"
     echo ""
