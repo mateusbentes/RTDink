@@ -25,7 +25,8 @@
         "install -Dm755 flatpak/dink-smallwood-hd.sh /app/bin/dink-smallwood-hd",
         "install -Dm644 flatpak/com.rtsoft.DinkSmallwoodHD.desktop /app/share/applications/com.rtsoft.DinkSmallwoodHD.desktop",
         "install -Dm644 flatpak/com.rtsoft.DinkSmallwoodHD.metainfo.xml /app/share/metainfo/com.rtsoft.DinkSmallwoodHD.metainfo.xml",
-        "install -Dm644 flatpak/com.rtsoft.DinkSmallwoodHD.png /app/share/icons/hicolor/512x512/apps/com.rtsoft.DinkSmallwoodHD.png"
+        "install -Dm644 flatpak/com.rtsoft.DinkSmallwoodHD.png /app/share/icons/hicolor/512x512/apps/com.rtsoft.DinkSmallwoodHD.png",
+        "install -Dm0644 LICENSE.md -t ${FLATPAK_DEST}/share/licenses/${FLATPAK_ID}/"
       ],
       "sources": [
         {
