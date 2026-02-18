@@ -136,4 +136,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 install(TARGETS RTDinkApp DESTINATION bin)
 install(DIRECTORY ${CMAKE_SOURCE_DIR}/bin/interface DESTINATION share/com.rtsoft.DinkSmallwoodHD)
 install(DIRECTORY ${CMAKE_SOURCE_DIR}/bin/audio DESTINATION share/com.rtsoft.DinkSmallwoodHD)
-install(DIRECTORY ${CMAKE_SOURCE_DIR}/bin/dink DESTINATION share/com.rtsoft.DinkSmallwoodHD)
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/bin/dink DESTINATION share/com.rtsoft.DinkSmallwoodHD
+    PATTERN "save*.dat" EXCLUDE
+    PATTERN "quicksave.dat" EXCLUDE
+    PATTERN "continue_state.dat" EXCLUDE
+    PATTERN "autosave*.dat" EXCLUDE
+)
