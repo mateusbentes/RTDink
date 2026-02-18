@@ -10,9 +10,13 @@ windows_vs2017/.idea/
 windows_vs2017/Win32/
 windows_vs2017/x64/
 
-# baked proton textures
+# baked proton textures (except in bin/interface/ where they're needed at runtime)
 *.rttex
 *.rtfont
+!bin/interface/**/*.rttex
+!bin/interface/*.rttex
+!bin/interface/**/*.rtfont
+!bin/interface/*.rtfont
 *.psd
 
 # other VS metadata?
@@ -28,6 +32,15 @@ bin/*
 !bin/version_history.txt
 !bin/zlib1.dll
 !bin/zlibwapi.dll
+!bin/dink/
+!bin/interface/
+!bin/audio/
+bin/dink/quicksave.dat
+bin/dink/continue_state.dat
+bin/dink/save*.dat
+bin/dmods/
+bin/log.txt
+bin/save.dat
 
 LegacyFiles
 MediaPack
