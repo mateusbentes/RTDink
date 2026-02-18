@@ -114,7 +114,30 @@ proton/
 
 ## Linux
 
-### Quick setup (Ubuntu/Debian)
+### Install via Flatpak (recommended for most users)
+
+No build required. Use the correct bundle for your CPU:
+
+- **x86_64 (Intel/AMD):** [DinkSmallwoodHD-x86_64.flatpak](https://www.rtsoft.com/dink/DinkSmallwoodHD-x86_64.flatpak)
+- **aarch64 (ARM 64-bit, e.g. Raspberry Pi 4, Jetson, Apple Silicon in Linux):** [DinkSmallwoodHD-aarch64.flatpak](https://www.rtsoft.com/dink/DinkSmallwoodHD-aarch64.flatpak)
+
+```sh
+# Install Flatpak if needed (Debian/Ubuntu)
+sudo apt install flatpak
+
+# Download and install (example for x86_64)
+wget https://www.rtsoft.com/dink/DinkSmallwoodHD-x86_64.flatpak
+flatpak install --user DinkSmallwoodHD-x86_64.flatpak
+
+# Run
+flatpak run com.rtsoft.DinkSmallwoodHD
+```
+
+On ARM, use `DinkSmallwoodHD-aarch64.flatpak` instead.
+
+### Build from source
+
+#### Quick setup (Ubuntu/Debian)
 
 The easiest way is to use the automated script from the repo root:
 
@@ -122,9 +145,9 @@ The easiest way is to use the automated script from the repo root:
 ./linux_setup.sh
 ```
 
-This installs dependencies, clones the Proton SDK, builds RTDink, and optionally downloads the game data.
+This installs dependencies, clones the Proton SDK, and builds RTDink. Game data is included in the repo.
 
-### Manual build
+#### Manual build
 
 #### Prerequisites
 
@@ -149,7 +172,7 @@ mkdir build && cd build
 cmake ..
 make -j$(nproc)
 
-# 3. Run (make sure dink/ game data is in the project root first)
+# 3. Run (game data is in the repo under bin/dink)
 ./RTDinkApp
 ```
 
@@ -158,7 +181,7 @@ CMake automatically creates symlinks for `interface/`, `audio/`, and `dink/` so 
 ### Troubleshooting
 
 - **Missing dependencies:** Install any missing `-dev` packages as reported by CMake.
-- **No game data:** The game will launch but crash when starting a new game if the `dink/` directory is missing.
+- **No game data:** The `dink/` game data is included in the repo (under `bin/dink/`). If it is missing, the game will crash when starting a new game.
 
 ---
 
