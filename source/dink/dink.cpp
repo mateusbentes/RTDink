@@ -17729,23 +17729,6 @@ void SetDefaultVars(bool bFullClear)
 	}
 }
 
-#if defined(RTLINUX) || defined(PLATFORM_LINUX)
-static string GetFlatpakDataPath()
-{
-	const char* flatpakId = getenv("FLATPAK_ID");
-	if (flatpakId)
-	{
-		const char* dataHome = getenv("XDG_DATA_HOME");
-		if (dataHome)
-		{
-			string path = string(dataHome) + "/";
-			return path;
-		}
-	}
-	return "";
-}
-#endif
-
 //in some cases, we include DMOD's with the app, but they are static and can't be changed
 string GetDMODStaticRootPath()
 {
@@ -17892,11 +17875,6 @@ string GetDMODRootPath(string *pDMODNameOutOrNull)
 
 	if (GetPlatformID() == PLATFORM_ID_WEBOS || GetPlatformID() == PLATFORM_ID_LINUX)
 	{
-#if defined(RTLINUX) || defined(PLATFORM_LINUX)
-		string flatpakPath = GetFlatpakDataPath();
-		if (!flatpakPath.empty())
-			return flatpakPath + "dmods/";
-#endif
 		return "dmods/";
 	}
 	return GetAppCachePath();
@@ -17930,13 +17908,7 @@ void InitDinkPaths(string gamePath, string gameDir, string dmodGameDir)
 	
 	if (dmodGameDir.empty())
 	{
-		string savePath = GetSavePath();
-#if defined(RTLINUX) || defined(PLATFORM_LINUX)
-		string flatpakPath = GetFlatpakDataPath();
-		if (!flatpakPath.empty())
-			savePath = flatpakPath;
-#endif
-		g_dglo.m_savePath = savePath + g_dglo.m_gameDir;
+		g_dglo.m_savePath =  GetSavePath()+g_dglo.m_gameDir;
 		g_dglo.m_dmodGamePathWithDir.clear();
 		g_dglo.m_dmodGameDir.clear();
 	} else
