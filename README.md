@@ -6,15 +6,7 @@ Visit https://www.rtsoft.com/pages/dink.php for installers for Windows, Mac, iOS
 
 Also mirrored on The Dink Network: https://www.dinknetwork.com/file/dink_smallwood_hd/
 
-**Linux (Flatpak)?** Install on any distro:
-
-```bash
-sudo apt install flatpak  # or your distro's package manager
-wget https://www.rtsoft.com/dink/DinkSmallwoodHD.flatpak && flatpak install --user DinkSmallwoodHD.flatpak
-flatpak run com.rtsoft.DinkSmallwoodHD
-```
-
-**Linux (build from source)?** Single command setup (Ubuntu/Debian/Fedora/Arch/openSUSE/Alpine):
+**Linux (build & play from source)?** Single command setup (Ubuntu/Debian/Fedora/Arch/openSUSE/Alpine):
 
 ```bash
 curl -sL https://raw.githubusercontent.com/SethRobinson/RTDink/master/linux_setup.sh | bash
@@ -22,9 +14,18 @@ curl -sL https://raw.githubusercontent.com/SethRobinson/RTDink/master/linux_setu
 
 This clones the repo, installs dependencies, builds from source, and downloads the game data automatically.
 
+**Linux (Flatpak)?** Install on any distro:
+
+```bash
+sudo apt install flatpak  # if you don't have it.  Replace apt with apt (debian) or dnf (fedora)
+wget https://www.rtsoft.com/dink/DinkSmallwoodHD.flatpak #download it
+flatpak install --user DinkSmallwoodHD.flatpak #install it
+flatpak run com.rtsoft.DinkSmallwoodHD #actually play it
+```
+
 ## Building from source
 
-RTDink can be built for multiple platforms. Each uses the [Proton SDK](https://github.com/SethRobinson/proton).  Each has full keyboard and controller support except Linux which is keyboard only.
+RTDink can be built for multiple platforms. Each uses the [Proton SDK](https://github.com/SethRobinson/proton).  Each has keyboard, controller and touchscreen support.
 
 | Platform | Build System | Quick Start |
 |----------|-------------|-------------|
@@ -34,52 +35,6 @@ RTDink can be built for multiple platforms. Each uses the [Proton SDK](https://g
 | **HTML5** | Emscripten | See [Proton HTML5 setup](https://www.rtsoft.com/wiki/doku.php?id=proton:html5_setup) |
 | **iOS** | Xcode | Proton SDK sibling layout, open `RTDink.xcodeproj` ([more info](INSTALL.md#ios)) |
 | **Android** | Gradle + CMake | Proton SDK sibling layout, open `AndroidGradle/` in Android Studio ([more info](INSTALL.md#android)) |
-
-### Game data requirement
-
-All platforms need the **Dink Smallwood game data** (`dink/` directory) to actually play the game. You can get it from:
-* The [Dink Smallwood HD](https://www.rtsoft.com/pages/dink.php) installer (extract the `dink/` folder)
-* The classic [Dink Smallwood v1.08](https://www.dinknetwork.com/file/dink_smallwood/) release
-
----
-
-## Linux
-
-### Flatpak (easiest)
-
-Install Flatpak if you don't have it, then install the game:
-
-```bash
-# Install Flatpak (skip if already installed)
-sudo apt install flatpak                          # Debian/Ubuntu
-sudo dnf install flatpak                          # Fedora
-sudo pacman -S flatpak                            # Arch
-
-# Download and install Dink Smallwood HD
-wget https://www.rtsoft.com/dink/DinkSmallwoodHD.flatpak
-flatpak install --user DinkSmallwoodHD.flatpak
-
-# Run
-flatpak run com.rtsoft.DinkSmallwoodHD
-```
-
-### Build from source
-
-The fastest way to build from source on Linux:
-
-```bash
-curl -sL https://raw.githubusercontent.com/SethRobinson/RTDink/master/linux_setup.sh | bash
-```
-
-That's it -- the script clones the repo, installs dependencies, builds RTDink, and downloads the game data. By default it installs to `~/RTDink`.
-
-You can also run it manually if you've already cloned the repo:
-
-```bash
-./linux_setup.sh
-```
-
-Options: `--no-data` (skip game data download), `--dir=PATH` (custom install directory). See [INSTALL.md](INSTALL.md#linux) for manual build steps.
 
 ---
 
@@ -143,7 +98,7 @@ If you have any issues, check out these two pages for more info on the Proton en
 
 1. Go into the `proton` root folder and clone the RTDink repo: `git clone https://github.com/SethRobinson/RTDink`
 
-2. Run `proton\RTDink\media\update_media.bat` to prepare the Proton texture and sound assets
+2. Run `proton\RTDink\media\update_media.bat` to prepare the Proton texture and sound assets (optional)
 
 3. Open `proton\RTDink\windows_vs2017\iPhoneRTDink.sln`
 
@@ -158,9 +113,8 @@ If you have any issues, check out these two pages for more info on the Proton en
    * `proton\shared\win\lib\x64\libssl-1_1-x64.dll`
    * `proton\shared\win\lib\x64\curl-ca-bundle.crt`
 
-6. Copy the `dink/` game data folder into `proton\RTDink\bin` (see [game data requirement](#game-data-requirement) above)
 
-7. Your Dink Smallwood HD build should be ready to run!
+6. Your Dink Smallwood HD build should be ready to run!
 
 ---
 
@@ -183,7 +137,6 @@ Special thanks to the entire [dinknetwork.com](https://www.dinknetwork.com/) com
 
 ## Other notes
 
-* **Have a bugfix or patch?** Please submit it as a pull request! Any submission (code, media, translations, etc) must be 100% compatible with the license as listed in the source.
-
+* **Have a bugfix or patch?** Please submit it as a pull request! Any submission (code, media, translations, etc) must be 100% compatible with this repo's license and the PR personally checked by a human.
 
 * See `script/win_installer/readme.txt` for version history.
