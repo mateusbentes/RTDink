@@ -35,5 +35,13 @@ if [ ! -e "$DATA_DIR/RTDinkApp" ]; then
     ln -sf "/app/bin/RTDinkApp" "$DATA_DIR/RTDinkApp"
 fi
 
+# Set SDL_SOUNDFONTS to use system soundfont or fallback to FluidSynth default
+# SDL_mixer with FluidSynth will use this to synthesize MIDI
+if [ -f "/usr/share/sounds/sf2/FluidR3_GM.sf2" ]; then
+    export SDL_SOUNDFONTS="/usr/share/sounds/sf2/FluidR3_GM.sf2"
+elif [ -f "/usr/share/soundfonts/default.sf2" ]; then
+    export SDL_SOUNDFONTS="/usr/share/soundfonts/default.sf2"
+fi
+
 cd "$DATA_DIR"
 exec ./RTDinkApp "$@"

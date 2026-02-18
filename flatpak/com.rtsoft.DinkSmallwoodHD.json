@@ -10,9 +10,54 @@
     "--socket=wayland",
     "--socket=pulseaudio",
     "--device=dri",
-    "--share=network"
+    "--share=network",
+    "--filesystem=xdg-run/pipewire-0:ro"
   ],
   "modules": [
+    {
+      "name": "fluidsynth",
+      "buildsystem": "cmake-ninja",
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DLIB_SUFFIX=",
+        "-Denable-libsndfile=OFF",
+        "-Denable-dbus=OFF",
+        "-Denable-ipv6=OFF",
+        "-Denable-network=OFF",
+        "-Denable-oss=OFF",
+        "-Denable-midishare=OFF",
+        "-Denable-readline=OFF",
+        "-Denable-ladspa=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://github.com/FluidSynth/fluidsynth/archive/v2.3.4.tar.gz",
+          "sha256": "1529ef5bc3b9ef3adc2a7964505912f7305103e269e50cc0316f500b22053ac9"
+        }
+      ]
+    },
+
+    {
+      "name": "SDL2_mixer",
+      "buildsystem": "cmake-ninja",
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DSDL2MIXER_FLUIDSYNTH=ON",
+        "-DSDL2MIXER_MIDI=ON",
+        "-DSDL2MIXER_OPUS=OFF",
+        "-DSDL2MIXER_MOD=OFF",
+        "-DSDL2MIXER_FLAC=OFF",
+        "-DSDL2MIXER_MP3=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://github.com/libsdl-org/SDL_mixer/releases/download/release-2.8.0/SDL2_mixer-2.8.0.tar.gz",
+          "sha256": "1cfb34c87b26dbdbc7afd68c4f545c0116ab5f90bbfecc5aebe2a9e4e3a5b5e8"
+        }
+      ]
+    },
     {
       "name": "dink-smallwood-hd",
       "buildsystem": "cmake-ninja",
