@@ -50,7 +50,7 @@
         "-DSDL2MIXER_OPUS=OFF",
         "-DSDL2MIXER_MOD=OFF",
         "-DSDL2MIXER_FLAC=OFF",
-        "-DSDL2MIXER_MP3=OFF"
+        "-DSDL2MIXER_MP3=ON"
       ],
       "sources": [
         {
