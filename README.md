@@ -10,7 +10,7 @@ Also mirrored on The Dink Network: https://www.dinknetwork.com/file/dink_smallwo
 
 ```bash
 sudo apt install flatpak  # or your distro's package manager
-wget https://www.rtsoft.com/dink/DinkSmallwoodHD.flatpak && flatpak install DinkSmallwoodHD.flatpak
+wget https://www.rtsoft.com/dink/DinkSmallwoodHD.flatpak && flatpak install --user DinkSmallwoodHD.flatpak
 flatpak run com.rtsoft.DinkSmallwoodHD
 ```
 
@@ -57,7 +57,7 @@ sudo pacman -S flatpak                            # Arch
 
 # Download and install Dink Smallwood HD
 wget https://www.rtsoft.com/dink/DinkSmallwoodHD.flatpak
-flatpak install DinkSmallwoodHD.flatpak
+flatpak install --user DinkSmallwoodHD.flatpak
 
 # Run
 flatpak run com.rtsoft.DinkSmallwoodHD
