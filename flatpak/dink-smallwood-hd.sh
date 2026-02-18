@@ -26,7 +26,7 @@ for item in "$APP_SHARE/dink/"*; do
     name=$(basename "$item")
     # Only create symlinks for items that aren't real files (i.e. user save data)
     if [ ! -f "$DATA_DIR/dink/$name" ]; then
-        ln -sf "$item" "$DATA_DIR/dink/$name"
+        ln -sfn "$item" "$DATA_DIR/dink/$name"
     fi
 done
 
