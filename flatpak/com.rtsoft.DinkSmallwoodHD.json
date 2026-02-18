@@ -20,6 +20,7 @@
       "config-opts": [
         "-DCMAKE_BUILD_TYPE=Release",
         "-DLIB_SUFFIX=",
+        "-DCMAKE_INSTALL_LIBDIR=lib",
         "-Denable-libsndfile=OFF",
         "-Denable-dbus=OFF",
         "-Denable-ipv6=OFF",
@@ -43,6 +44,7 @@
       "builddir": true,
       "config-opts": [
         "-DCMAKE_BUILD_TYPE=Release",
+        "-DCMAKE_INSTALL_LIBDIR=lib",
         "-DSDL2MIXER_FLUIDSYNTH=ON",
         "-DSDL2MIXER_MIDI=ON",
         "-DSDL2MIXER_OPUS=OFF",
