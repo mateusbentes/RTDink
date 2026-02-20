@@ -49,6 +49,9 @@ jobs:
           echo "Checking build settings..."
           xcodebuild -project RTDink.xcodeproj -showBuildSettings | grep -E "ARCHS|VALID_ARCHS|MACOSX_DEPLOYMENT_TARGET"
       
+      - name: Install SDL2
+        run: brew install sdl2
+
       - name: Generate pnglibconf.h
         run: |
           LIBPNG=../shared/Irrlicht/source/Irrlicht/libpng
@@ -105,6 +108,9 @@ jobs:
           mkdir -p bin/game
           echo "Placeholder for game assets" > bin/game/README.txt
       
+      - name: Install SDL2
+        run: brew install sdl2
+
       - name: Generate pnglibconf.h
         run: |
           LIBPNG=../shared/Irrlicht/source/Irrlicht/libpng
