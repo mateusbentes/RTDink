@@ -1637,6 +1637,7 @@
 					../../shared/FliteTTS/include,
 					../../shared/OSX,
 					/Users/Seth/dev/rtsvn/projects/proton/locallibs,
+					../../shared/RTSimpleApp/source,
 					/opt/homebrew/include,
 					/usr/local/include,
 				);
@@ -1753,6 +1754,7 @@
 					../../shared/FliteTTS/include,
 					../../shared/OSX,
 					/Users/Seth/dev/rtsvn/projects/proton/locallibs,
+					../../shared/RTSimpleApp/source,
 					/opt/homebrew/include,
 					/usr/local/include,
 				);
@@ -1791,6 +1793,7 @@
 					../../shared/FliteTTS/include,
 					../../shared/OSX,
 					/Users/Seth/dev/rtsvn/projects/proton/locallibs,
+					../../shared/RTSimpleApp/source,
 					/opt/homebrew/include,
 					/usr/local/include,
 				);
