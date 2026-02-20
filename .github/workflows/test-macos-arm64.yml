@@ -69,7 +69,8 @@ jobs:
             GCC_PREPROCESSOR_DEFINITIONS='$(inherited) RT_NO_FMOD=1' \
             EXCLUDED_SOURCE_FILE_NAMES="AudioManagerFMODStudio.cpp" \
             OTHER_LDFLAGS="" \
-            build
+            build 2>&1 | tee /tmp/xcodebuild.log; \
+          grep -E "error:|fatal error:|BUILD FAILED" /tmp/xcodebuild.log | head -50
       
       - name: Check Binary Architecture
         run: |
