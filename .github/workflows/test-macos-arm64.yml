@@ -66,6 +66,9 @@ jobs:
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO \
+            GCC_PREPROCESSOR_DEFINITIONS='$(inherited) RT_NO_FMOD=1' \
+            EXCLUDED_SOURCE_FILE_NAMES="AudioManagerFMODStudio.cpp" \
+            OTHER_LDFLAGS="" \
             build
       
       - name: Check Binary Architecture
@@ -125,6 +128,9 @@ jobs:
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO \
+            GCC_PREPROCESSOR_DEFINITIONS='$(inherited) RT_NO_FMOD=1' \
+            EXCLUDED_SOURCE_FILE_NAMES="AudioManagerFMODStudio.cpp" \
+            OTHER_LDFLAGS="" \
             build
       
       - name: Verify Universal Binary
