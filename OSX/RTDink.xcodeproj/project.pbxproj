@@ -1739,6 +1739,7 @@
 				GCC_MODEL_TUNING = G5;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				"EXCLUDED_SOURCE_FILE_NAMES[arch=x86_64]" = "arm_init.c filter_neon_intrinsics.c palette_neon_intrinsics.c filter_neon.S";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
