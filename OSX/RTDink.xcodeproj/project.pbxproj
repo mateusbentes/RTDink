@@ -1273,6 +1273,7 @@
 			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "RTDink" */;
 			buildPhases = (
 				8D1107290486CEB800E47090 /* Resources */,
+				AF0000001000000000000001 /* Generate pnglibconf.h */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
 				5D70BB2712B7208900A1AB17 /* CopyFiles */,
@@ -1375,6 +1376,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "echo Disabled, run PackageDinkOSX.command instead, that way this signs it for us first\nexit\n\nif [ \"${CONFIGURATION}\" = 'Release' ]; then\n[ \"$ACTION\" = build ] || exit 0\n[ \"$BUILD_VARIANTS\" = \"normal\" ] || exit 0\n\n\nAPPNAME=\"Dink Smallwood HD\"\n\nCODESIGN=\"Mac Developer: Seth Robinson\"\n#CODESIGN=\"3rd Party Mac Developer Application: Robinson Technologies\"\n\nINSTALLSIGN=\"3rd Party Mac Developer Installer: Robinson Technologies\"\n\n#codesign -vvvv -f -s \"$CODESIGN\" \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app/Contents/MacOS/libfmod.dylib\"\n#codesign -vvvv -f -s \"$CODESIGN\" \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app\"\n#codesign -vvvv \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app\"\nfi\n";
+		};
+		AF0000001000000000000001 /* Generate pnglibconf.h */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate pnglibconf.h";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "LIBPNG=\"$SRCROOT/../../shared/Irrlicht/source/Irrlicht/libpng\"\nif [ ! -f \"$LIBPNG/pnglibconf.h\" ]; then\n  cp \"$LIBPNG/pnglibconf.h.prebuilt\" \"$LIBPNG/pnglibconf.h\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
