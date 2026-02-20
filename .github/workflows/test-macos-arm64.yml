@@ -32,12 +32,10 @@ jobs:
           cd RTDink/OSX
           ls -la ../../shared/ | head -5
       
-      - name: Create missing files
+      - name: Create missing game directory
         run: |
           mkdir -p bin/game
           echo "Placeholder for game assets" > bin/game/README.txt
-          mkdir -p OSX/English.lproj
-          touch OSX/English.lproj/InfoPlist.strings
       
       - name: System Info
         run: |
@@ -97,12 +95,10 @@ jobs:
           git clone https://github.com/SethRobinson/proton.git
           ln -s proton/shared shared
       
-      - name: Create missing files
+      - name: Create missing game directory
         run: |
           mkdir -p bin/game
           echo "Placeholder for game assets" > bin/game/README.txt
-          mkdir -p OSX/English.lproj
-          touch OSX/English.lproj/InfoPlist.strings
       
       - name: Build Universal Binary
         run: |
