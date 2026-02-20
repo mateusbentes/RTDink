@@ -172,11 +172,6 @@
 		5D70C10612B72BE700A1AB17 /* TextScanner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D70C09D12B72BE700A1AB17 /* TextScanner.cpp */; };
 		5D70C10712B72BE700A1AB17 /* MathUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D70C09F12B72BE700A1AB17 /* MathUtils.cpp */; };
 		5D70C10812B72BE700A1AB17 /* Variant.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D70C0A112B72BE700A1AB17 /* Variant.cpp */; };
-		5D70C10912B72BE700A1AB17 /* connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D70C0A512B72BE700A1AB17 /* connection.cpp */; };
-		5D70C10A12B72BE700A1AB17 /* named_slot_map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D70C0A612B72BE700A1AB17 /* named_slot_map.cpp */; };
-		5D70C10B12B72BE700A1AB17 /* signal_base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D70C0A712B72BE700A1AB17 /* signal_base.cpp */; };
-		5D70C10C12B72BE700A1AB17 /* slot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D70C0A812B72BE700A1AB17 /* slot.cpp */; };
-		5D70C10D12B72BE700A1AB17 /* trackable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D70C0A912B72BE700A1AB17 /* trackable.cpp */; };
 		5D70C10E12B72BE700A1AB17 /* GLESUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D70C0AA12B72BE700A1AB17 /* GLESUtils.cpp */; };
 		5D70C10F12B72BE700A1AB17 /* ResourceUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D70C0AC12B72BE700A1AB17 /* ResourceUtils.cpp */; };
 		5D70C11012B72BE700A1AB17 /* MiscUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D70C0AF12B72BE700A1AB17 /* MiscUtils.cpp */; };
@@ -1546,12 +1541,7 @@
 				5D70C10712B72BE700A1AB17 /* MathUtils.cpp in Sources */,
 				5D70C10812B72BE700A1AB17 /* Variant.cpp in Sources */,
 				5D21BA591FA6C76C00B12CB3 /* jcparam.c in Sources */,
-				5D70C10912B72BE700A1AB17 /* connection.cpp in Sources */,
-				5D70C10A12B72BE700A1AB17 /* named_slot_map.cpp in Sources */,
-				5D70C10B12B72BE700A1AB17 /* signal_base.cpp in Sources */,
-				5D70C10C12B72BE700A1AB17 /* slot.cpp in Sources */,
 				5D21B9E11FA6C31D00B12CB3 /* png.c in Sources */,
-				5D70C10D12B72BE700A1AB17 /* trackable.cpp in Sources */,
 				5D21BA4F1FA6C76C00B12CB3 /* jmemnobs.c in Sources */,
 				5D21BA4E1FA6C76C00B12CB3 /* jmemmgr.c in Sources */,
 				5D21B9FB1FA6C34500B12CB3 /* Gamepad.cpp in Sources */,
