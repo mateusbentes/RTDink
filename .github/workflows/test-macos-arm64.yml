@@ -49,6 +49,11 @@ jobs:
           echo "Checking build settings..."
           xcodebuild -project RTDink.xcodeproj -showBuildSettings | grep -E "ARCHS|VALID_ARCHS|MACOSX_DEPLOYMENT_TARGET"
       
+      - name: Generate pnglibconf.h
+        run: |
+          LIBPNG=../shared/Irrlicht/source/Irrlicht/libpng
+          cp "$LIBPNG/pnglibconf.h.prebuilt" "$LIBPNG/pnglibconf.h"
+
       - name: Build for ARM64
         run: |
           cd OSX
@@ -100,6 +105,11 @@ jobs:
           mkdir -p bin/game
           echo "Placeholder for game assets" > bin/game/README.txt
       
+      - name: Generate pnglibconf.h
+        run: |
+          LIBPNG=../shared/Irrlicht/source/Irrlicht/libpng
+          cp "$LIBPNG/pnglibconf.h.prebuilt" "$LIBPNG/pnglibconf.h"
+
       - name: Build Universal Binary
         run: |
           cd OSX
