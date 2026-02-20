@@ -68,8 +68,7 @@ jobs:
             CODE_SIGNING_ALLOWED=NO \
             GCC_PREPROCESSOR_DEFINITIONS='$(inherited) RT_NO_FMOD=1' \
             EXCLUDED_SOURCE_FILE_NAMES="AudioManagerFMODStudio.cpp" \
-            build 2>&1 | tee /tmp/xcodebuild.log; \
-          echo "=== ERRORS ===" && grep -E "error:|fatal error:|Undefined symbols|referenced from|ld:" /tmp/xcodebuild.log | head -80
+            build
       
       - name: Check Binary Architecture
         run: |

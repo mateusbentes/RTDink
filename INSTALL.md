@@ -10,7 +10,7 @@ See [README.md](README.md) for download links if you just want to play the game.
 | **Linux** | CMake | Proton SDK cloned inside project, uses SDL2 + SDL2_mixer for audio |
 | **iOS** | Xcode | Proton SDK sibling layout, uses FMOD for audio |
 | **Android** | Gradle + CMake | Proton SDK sibling layout, uses FMOD for audio |
-| **macOS** | Xcode | Requires FMOD Studio API (see [macOS section](#macos)) |
+| **macOS** | Xcode | ARM64 + x86_64 (Apple Silicon + Intel), requires FMOD for audio (see [macOS section](#macos)) |
 | **HTML5** | Emscripten | See [Proton HTML5 setup](https://www.rtsoft.com/wiki/doku.php?id=proton:html5_setup) |
 
 All platforms require the **Dink Smallwood game data** (`dink/` directory) to play. See [README.md](README.md#just-want-to-play) for how to obtain it.
