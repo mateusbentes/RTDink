@@ -42,7 +42,11 @@ void AddText(const char *tex, const char *filename);
 #include "StackWalker/StackUtils.h"
 #endif
 
+#if defined(RTLINUX) || defined(PLATFORM_LINUX) || defined(PLATFORM_OSX)
+bool g_bIsFullScreen = false;
+#else
 extern bool g_bIsFullScreen;
+#endif
 
 extern bool g_script_debug_mode;
 extern Surface g_transitionSurf;
