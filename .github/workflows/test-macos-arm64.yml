@@ -32,6 +32,11 @@ jobs:
           cd RTDink/OSX
           ls -la ../../shared/ | head -5
       
+      - name: Create missing game directory
+        run: |
+          mkdir -p bin/game
+          echo "Placeholder for game assets" > bin/game/README.txt
+      
       - name: System Info
         run: |
           echo "Architecture: $(uname -m)"
@@ -89,6 +94,11 @@ jobs:
           cd ..
           git clone https://github.com/SethRobinson/proton.git
           ln -s proton/shared shared
+      
+      - name: Create missing game directory
+        run: |
+          mkdir -p bin/game
+          echo "Placeholder for game assets" > bin/game/README.txt
       
       - name: Build Universal Binary
         run: |
