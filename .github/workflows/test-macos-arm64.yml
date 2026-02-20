@@ -27,6 +27,11 @@ jobs:
         run: |
           git clone https://github.com/SethRobinson/proton.git
           ln -s proton/shared shared
+          ls -la | grep shared
+          ls -la shared/ | head -5
+          echo "Checking path from OSX:"
+          cd OSX
+          ls -la ../../shared/ | head -5
       
       - name: System Info
         run: |
