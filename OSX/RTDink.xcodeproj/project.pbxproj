@@ -13,7 +13,6 @@
 		5D21B9E41FA6C31D00B12CB3 /* pngrutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 5D21B9D11FA6C31B00B12CB3 /* pngrutil.c */; };
 		5D21B9E51FA6C31D00B12CB3 /* pngwrite.c in Sources */ = {isa = PBXBuildFile; fileRef = 5D21B9D21FA6C31B00B12CB3 /* pngwrite.c */; };
 		5D21B9E61FA6C31D00B12CB3 /* pngget.c in Sources */ = {isa = PBXBuildFile; fileRef = 5D21B9D31FA6C31B00B12CB3 /* pngget.c */; };
-		5D21B9E71FA6C31D00B12CB3 /* pnggccrd.c in Sources */ = {isa = PBXBuildFile; fileRef = 5D21B9D41FA6C31B00B12CB3 /* pnggccrd.c */; };
 		5D21B9E81FA6C31D00B12CB3 /* pngrio.c in Sources */ = {isa = PBXBuildFile; fileRef = 5D21B9D51FA6C31B00B12CB3 /* pngrio.c */; };
 		5D21B9E91FA6C31D00B12CB3 /* pngwtran.c in Sources */ = {isa = PBXBuildFile; fileRef = 5D21B9D61FA6C31C00B12CB3 /* pngwtran.c */; };
 		5D21B9EA1FA6C31D00B12CB3 /* pngpread.c in Sources */ = {isa = PBXBuildFile; fileRef = 5D21B9D71FA6C31C00B12CB3 /* pngpread.c */; };
@@ -21,7 +20,6 @@
 		5D21B9EC1FA6C31D00B12CB3 /* pngwio.c in Sources */ = {isa = PBXBuildFile; fileRef = 5D21B9D91FA6C31C00B12CB3 /* pngwio.c */; };
 		5D21B9ED1FA6C31D00B12CB3 /* pngmem.c in Sources */ = {isa = PBXBuildFile; fileRef = 5D21B9DA1FA6C31C00B12CB3 /* pngmem.c */; };
 		5D21B9EE1FA6C31D00B12CB3 /* pngwutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 5D21B9DB1FA6C31C00B12CB3 /* pngwutil.c */; };
-		5D21B9EF1FA6C31D00B12CB3 /* pngvcrd.c in Sources */ = {isa = PBXBuildFile; fileRef = 5D21B9DE1FA6C31D00B12CB3 /* pngvcrd.c */; };
 		5D21B9F01FA6C31D00B12CB3 /* pngread.c in Sources */ = {isa = PBXBuildFile; fileRef = 5D21B9DF1FA6C31D00B12CB3 /* pngread.c */; };
 		5D21B9F11FA6C31D00B12CB3 /* pngrtran.c in Sources */ = {isa = PBXBuildFile; fileRef = 5D21B9E01FA6C31D00B12CB3 /* pngrtran.c */; };
 		5D21B9F91FA6C34500B12CB3 /* GamepadProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D21B9F41FA6C34500B12CB3 /* GamepadProvider.cpp */; };
@@ -1476,7 +1474,6 @@
 				5D70C0E212B72BE700A1AB17 /* TextRenderComponent.cpp in Sources */,
 				5D70C0E312B72BE700A1AB17 /* Button2DComponent.cpp in Sources */,
 				5D21BA671FA6C76C00B12CB3 /* jcinit.c in Sources */,
-				5D21B9EF1FA6C31D00B12CB3 /* pngvcrd.c in Sources */,
 				5D21B9E41FA6C31D00B12CB3 /* pngrutil.c in Sources */,
 				5D70C0E412B72BE700A1AB17 /* TouchHandlerComponent.cpp in Sources */,
 				5D70C0E512B72BE700A1AB17 /* OverlayRenderComponent.cpp in Sources */,
@@ -1495,7 +1492,6 @@
 				5D70C0EB12B72BE700A1AB17 /* SoftSurface.cpp in Sources */,
 				5D21B9E51FA6C31D00B12CB3 /* pngwrite.c in Sources */,
 				5D70C0EC12B72BE700A1AB17 /* RenderBatcher.cpp in Sources */,
-				5D21B9E71FA6C31D00B12CB3 /* pnggccrd.c in Sources */,
 				5D70C0ED12B72BE700A1AB17 /* L_Defination.cpp in Sources */,
 				5D70C0EE12B72BE700A1AB17 /* L_DroppingEffect.cpp in Sources */,
 				5D70C0EF12B72BE700A1AB17 /* L_EffectEmitter.cpp in Sources */,
