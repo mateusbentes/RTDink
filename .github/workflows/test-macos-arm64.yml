@@ -70,7 +70,7 @@ jobs:
             EXCLUDED_SOURCE_FILE_NAMES="AudioManagerFMODStudio.cpp" \
             OTHER_LDFLAGS="" \
             build 2>&1 | tee /tmp/xcodebuild.log; \
-          grep -E "error:|fatal error:|BUILD FAILED" /tmp/xcodebuild.log | head -50
+          echo "=== ERRORS ===" && grep -E "error:|fatal error:|Undefined symbols|referenced from|ld:" /tmp/xcodebuild.log | head -80
       
       - name: Check Binary Architecture
         run: |
