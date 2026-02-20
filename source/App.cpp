@@ -199,6 +199,8 @@ const char * GetAppName()
 
 #if defined(RTLINUX) || defined(PLATFORM_LINUX) || defined(PLATFORM_OSX)
 
+#include <SDL2/SDL.h>
+
 SDL_Window* GetSDLWindow() {
     SDL_Window* window = SDL_GL_GetCurrentWindow();
     if (!window) {
