@@ -27,6 +27,11 @@
 		5D21B9FB1FA6C34500B12CB3 /* Gamepad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D21B9F81FA6C34500B12CB3 /* Gamepad.cpp */; };
 		5D21B9FE1FA6C37E00B12CB3 /* AudioManagerFMODStudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D21B9FD1FA6C37E00B12CB3 /* AudioManagerFMODStudio.cpp */; };
 		5D21BA051FA6C3DD00B12CB3 /* AdProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D21BA021FA6C3DD00B12CB3 /* AdProvider.cpp */; };
+		AA000001000000000000AA01 /* EmulatedPointerComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA000002000000000000AA01 /* EmulatedPointerComponent.cpp */; };
+		AA000001000000000000AA02 /* LogDisplayComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA000002000000000000AA02 /* LogDisplayComponent.cpp */; };
+		AA000001000000000000AA03 /* arm_init.c in Sources */ = {isa = PBXBuildFile; fileRef = AA000002000000000000AA03 /* arm_init.c */; };
+		AA000001000000000000AA04 /* filter_neon_intrinsics.c in Sources */ = {isa = PBXBuildFile; fileRef = AA000002000000000000AA04 /* filter_neon_intrinsics.c */; };
+		AA000001000000000000AA05 /* palette_neon_intrinsics.c in Sources */ = {isa = PBXBuildFile; fileRef = AA000002000000000000AA05 /* palette_neon_intrinsics.c */; };
 		5D21BA071FA6C3DD00B12CB3 /* GamepadiCade.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D21BA041FA6C3DD00B12CB3 /* GamepadiCade.cpp */; };
 		5D21BA0B1FA6C47F00B12CB3 /* JPGSurfaceLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D21BA091FA6C47E00B12CB3 /* JPGSurfaceLoader.cpp */; };
 		5D21BA0E1FA6C6BF00B12CB3 /* RenderScissorComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D21BA0C1FA6C6BE00B12CB3 /* RenderScissorComponent.cpp */; };
@@ -242,6 +247,11 @@
 		5D21B9CF1FA6C31B00B12CB3 /* pngerror.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngerror.c; path = ../../../shared/Irrlicht/source/Irrlicht/libpng/pngerror.c; sourceTree = "<group>"; };
 		5D21B9D01FA6C31B00B12CB3 /* pngtrans.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngtrans.c; path = ../../../shared/Irrlicht/source/Irrlicht/libpng/pngtrans.c; sourceTree = "<group>"; };
 		5D21B9D11FA6C31B00B12CB3 /* pngrutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngrutil.c; path = ../../../shared/Irrlicht/source/Irrlicht/libpng/pngrutil.c; sourceTree = "<group>"; };
+		AA000002000000000000AA01 /* EmulatedPointerComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EmulatedPointerComponent.cpp; path = ../source/Component/EmulatedPointerComponent.cpp; sourceTree = SOURCE_ROOT; };
+		AA000002000000000000AA02 /* LogDisplayComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LogDisplayComponent.cpp; path = ../../shared/Entity/LogDisplayComponent.cpp; sourceTree = SOURCE_ROOT; };
+		AA000002000000000000AA03 /* arm_init.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = arm_init.c; path = ../../shared/Irrlicht/source/Irrlicht/libpng/arm/arm_init.c; sourceTree = SOURCE_ROOT; };
+		AA000002000000000000AA04 /* filter_neon_intrinsics.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = filter_neon_intrinsics.c; path = ../../shared/Irrlicht/source/Irrlicht/libpng/arm/filter_neon_intrinsics.c; sourceTree = SOURCE_ROOT; };
+		AA000002000000000000AA05 /* palette_neon_intrinsics.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = palette_neon_intrinsics.c; path = ../../shared/Irrlicht/source/Irrlicht/libpng/arm/palette_neon_intrinsics.c; sourceTree = SOURCE_ROOT; };
 		5D21B9D21FA6C31B00B12CB3 /* pngwrite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngwrite.c; path = ../../../shared/Irrlicht/source/Irrlicht/libpng/pngwrite.c; sourceTree = "<group>"; };
 		5D21B9D31FA6C31B00B12CB3 /* pngget.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngget.c; path = ../../../shared/Irrlicht/source/Irrlicht/libpng/pngget.c; sourceTree = "<group>"; };
 		5D21B9D41FA6C31B00B12CB3 /* pnggccrd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pnggccrd.c; path = ../../../shared/Irrlicht/source/Irrlicht/libpng/pnggccrd.c; sourceTree = "<group>"; };
@@ -1560,6 +1570,11 @@
 				5D70C15712B72C0900A1AB17 /* CursorComponent.cpp in Sources */,
 				5D70C15812B72C0900A1AB17 /* FPSControlComponent.cpp in Sources */,
 				5D70C15912B72C0900A1AB17 /* ParticleTestComponent.cpp in Sources */,
+				AA000001000000000000AA01 /* EmulatedPointerComponent.cpp in Sources */,
+				AA000001000000000000AA02 /* LogDisplayComponent.cpp in Sources */,
+				AA000001000000000000AA03 /* arm_init.c in Sources */,
+				AA000001000000000000AA04 /* filter_neon_intrinsics.c in Sources */,
+				AA000001000000000000AA05 /* palette_neon_intrinsics.c in Sources */,
 				5D21BA4A1FA6C76C00B12CB3 /* jidctred.c in Sources */,
 				5D21BA5F1FA6C76C00B12CB3 /* jdcolor.c in Sources */,
 				5D70C15A12B72C0900A1AB17 /* ExpiredMenu.cpp in Sources */,
@@ -1670,7 +1685,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					/opt/homebrew/lib,
+					/usr/local/lib,
 				);
+				OTHER_LDFLAGS = "-lSDL2";
 				PRODUCT_NAME = "Dink Smallwood HD";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
@@ -1695,7 +1713,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					/opt/homebrew/lib,
+					/usr/local/lib,
 				);
+				OTHER_LDFLAGS = "-lSDL2";
 				PRODUCT_NAME = "Dink Smallwood HD";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
@@ -1715,7 +1736,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					/opt/homebrew/lib,
+					/usr/local/lib,
 				);
+				OTHER_LDFLAGS = "-lSDL2";
 				PRODUCT_NAME = "Dink Smallwood HD";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
