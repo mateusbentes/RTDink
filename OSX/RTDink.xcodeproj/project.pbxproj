@@ -540,8 +540,8 @@
 		5D70C12712B72C0900A1AB17 /* CursorComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CursorComponent.h; path = ../source/Component/CursorComponent.h; sourceTree = SOURCE_ROOT; };
 		5D70C12812B72C0900A1AB17 /* FPSControlComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FPSControlComponent.cpp; path = ../source/Component/FPSControlComponent.cpp; sourceTree = SOURCE_ROOT; };
 		5D70C12912B72C0900A1AB17 /* FPSControlComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FPSControlComponent.h; path = ../source/Component/FPSControlComponent.h; sourceTree = SOURCE_ROOT; };
-		5D70C12A12B72C0900A1AB17 /* ParticleTestComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ParticleTestComponent.cpp; path = ../../../proton/RTSimpleApp/source/Component/ParticleTestComponent.cpp; sourceTree = SOURCE_ROOT; };
-		5D70C12B12B72C0900A1AB17 /* ParticleTestComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParticleTestComponent.h; path = ../../../proton/RTSimpleApp/source/Component/ParticleTestComponent.h; sourceTree = SOURCE_ROOT; };
+		5D70C12A12B72C0900A1AB17 /* ParticleTestComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ParticleTestComponent.cpp; path = ../../proton/RTSimpleApp/source/Component/ParticleTestComponent.cpp; sourceTree = SOURCE_ROOT; };
+		5D70C12B12B72C0900A1AB17 /* ParticleTestComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParticleTestComponent.h; path = ../../proton/RTSimpleApp/source/Component/ParticleTestComponent.h; sourceTree = SOURCE_ROOT; };
 		5D70C12D12B72C0900A1AB17 /* ExpiredMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExpiredMenu.h; path = ../source/GUI/ExpiredMenu.h; sourceTree = SOURCE_ROOT; };
 		5D70C12E12B72C0900A1AB17 /* ExpiredMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ExpiredMenu.cpp; path = ../source/GUI/ExpiredMenu.cpp; sourceTree = SOURCE_ROOT; };
 		5D70C12F12B72C0900A1AB17 /* ReadTextMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReadTextMenu.h; path = ../source/GUI/ReadTextMenu.h; sourceTree = SOURCE_ROOT; };
@@ -1637,7 +1637,7 @@
 					../../shared/FliteTTS/include,
 					../../shared/OSX,
 					/Users/Seth/dev/rtsvn/projects/proton/locallibs,
-					../../../proton/RTSimpleApp/source,
+					../../proton/RTSimpleApp/source,
 					/opt/homebrew/include,
 					/usr/local/include,
 				);
@@ -1754,7 +1754,7 @@
 					../../shared/FliteTTS/include,
 					../../shared/OSX,
 					/Users/Seth/dev/rtsvn/projects/proton/locallibs,
-					../../../proton/RTSimpleApp/source,
+					../../proton/RTSimpleApp/source,
 					/opt/homebrew/include,
 					/usr/local/include,
 				);
@@ -1793,7 +1793,7 @@
 					../../shared/FliteTTS/include,
 					../../shared/OSX,
 					/Users/Seth/dev/rtsvn/projects/proton/locallibs,
-					../../../proton/RTSimpleApp/source,
+					../../proton/RTSimpleApp/source,
 					/opt/homebrew/include,
 					/usr/local/include,
 				);
