@@ -10,7 +10,7 @@ See [README.md](README.md) for download links if you just want to play the game.
 | **Linux** | CMake | Proton SDK cloned inside project, uses SDL2 + SDL2_mixer for audio |
 | **iOS** | Xcode | Proton SDK sibling layout, uses FMOD for audio |
 | **Android** | Gradle + CMake | Proton SDK sibling layout, uses FMOD for audio |
-| **macOS** | Xcode | Broken/unmaintained |
+| **macOS** | Xcode | Requires FMOD Studio API (see [macOS section](#macos)) |
 | **HTML5** | Emscripten | See [Proton HTML5 setup](https://www.rtsoft.com/wiki/doku.php?id=proton:html5_setup) |
 
 All platforms require the **Dink Smallwood game data** (`dink/` directory) to play. See [README.md](README.md#just-want-to-play) for how to obtain it.
@@ -92,23 +92,59 @@ proton/
 
 ---
 
-## macOS (broken/unmaintained)
+## macOS
 
-> **Note:** The macOS build has not been maintained for a long time and likely does not build without fixes. It is left here for reference.
+The macOS build uses the Xcode project at `OSX/RTDink.xcodeproj`. It requires the **FMOD Studio API** for audio (proprietary, free for non-commercial use).
 
-The Xcode project is at the repo root (`RTDink.xcodeproj`). Same sibling layout as Windows:
+> **Note:** The CI workflow (`test_mac_arm64` branch) verifies the build compiles on Apple Silicon (M1/M2). FMOD is required to link a runnable binary.
+
+### Directory layout
+
+Clone both repos as siblings:
 
 ```
-proton/
-  shared/          <-- Proton SDK
-  RTDink/
-    RTDink.xcodeproj
+some_folder/
+  proton/              <-- Proton SDK (cloned here)
+    shared/
+    RTSimpleApp/
+  RTDink/              <-- this repo (cloned here)
+    OSX/
+      RTDink.xcodeproj
 ```
 
-1. Clone [Proton SDK](https://github.com/SethRobinson/proton)
-2. Clone this repo inside the Proton directory
-3. Open `RTDink.xcodeproj` in Xcode
-4. Build and run (may require fixes)
+### Steps
+
+1. Clone the Proton SDK and this repo as siblings:
+
+```bash
+git clone https://github.com/SethRobinson/proton.git
+git clone https://github.com/SethRobinson/RTDink.git
+```
+
+2. Install SDL2 via Homebrew:
+
+```bash
+brew install sdl2
+```
+
+3. Download the **FMOD Studio API** from https://www.fmod.com/download (free registration required).
+   - Choose **FMOD Engine** → **macOS**
+   - Extract and copy the `api/` folder into `proton/shared/mac/fmodstudio/` so the path looks like:
+     ```
+     proton/shared/mac/fmodstudio/api/core/inc/fmod.hpp
+     proton/shared/mac/fmodstudio/api/core/lib/libfmod.dylib
+     ```
+   - Also copy `libfmod.dylib` into `RTDink/OSX/` (next to the `.xcodeproj`)
+
+4. Open the Xcode project:
+
+```bash
+open RTDink/OSX/RTDink.xcodeproj
+```
+
+5. Select the **Release** configuration and build (`⌘B`).
+
+> **Without FMOD:** The project will fail to compile at `AudioManagerFMODStudio.cpp` because `fmod.hpp` is not found. FMOD is a hard dependency for the macOS Xcode build — there is no SDL2 audio fallback in this build path.
 
 ---
 
