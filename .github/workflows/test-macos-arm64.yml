@@ -1,0 +1,120 @@
+name: Test macOS ARM64 Build
+
+# This workflow only runs in YOUR fork
+# It won't affect Seth's repository
+# You can trigger it manually from GitHub Actions tab
+
+on:
+  # Manual trigger - you control when it runs
+  workflow_dispatch:
+  
+  # Or automatically on pushes to your test branches
+  push:
+    branches:
+      - 'test/**'
+      - 'macos/**'
+
+jobs:
+  build-macos-arm64:
+    name: Build on Apple Silicon
+    runs-on: macos-14  # This is Apple Silicon (M1)
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      
+      - name: System Info
+        run: |
+          echo "Architecture: $(uname -m)"
+          echo "macOS Version: $(sw_vers -productVersion)"
+          xcodebuild -version
+      
+      - name: Check Xcode Project
+        run: |
+          cd OSX
+          echo "Checking build settings..."
+          xcodebuild -project RTDink.xcodeproj -showBuildSettings | grep -E "ARCHS|VALID_ARCHS|MACOSX_DEPLOYMENT_TARGET"
+      
+      - name: Build for ARM64
+        run: |
+          cd OSX
+          xcodebuild -project RTDink.xcodeproj \
+            -configuration Release \
+            -arch arm64 \
+            build
+      
+      - name: Check Binary Architecture
+        run: |
+          cd OSX
+          APP=$(find build -name "*.app" -type d | head -1)
+          if [ -n "$APP" ]; then
+            BINARY="$APP/Contents/MacOS/$(basename "$APP" .app)"
+            if [ -f "$BINARY" ]; then
+              echo "Binary found: $BINARY"
+              file "$BINARY"
+              lipo -info "$BINARY" || true
+            fi
+          fi
+      
+      - name: Upload Build Artifact
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: RTDink-macOS-ARM64
+          path: OSX/build/Release/*.app
+          retention-days: 7
+
+  build-universal:
+    name: Build Universal Binary (ARM64 + x86_64)
+    runs-on: macos-14
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      
+      - name: Build Universal Binary
+        run: |
+          cd OSX
+          xcodebuild -project RTDink.xcodeproj \
+            -configuration Release \
+            -arch arm64 -arch x86_64 \
+            build
+      
+      - name: Verify Universal Binary
+        run: |
+          cd OSX
+          APP=$(find build -name "*.app" -type d | head -1)
+          if [ -n "$APP" ]; then
+            BINARY="$APP/Contents/MacOS/$(basename "$APP" .app)"
+            if [ -f "$BINARY" ]; then
+              echo "Checking architectures in Universal Binary:"
+              lipo -info "$BINARY"
+              
+              # Should show both arm64 and x86_64
+              if lipo -info "$BINARY" | grep -q "arm64"; then
+                echo "✅ ARM64 architecture present"
+              else
+                echo "❌ ARM64 architecture missing"
+                exit 1
+              fi
+              
+              if lipo -info "$BINARY" | grep -q "x86_64"; then
+                echo "✅ x86_64 architecture present"
+              else
+                echo "❌ x86_64 architecture missing"
+                exit 1
+              fi
+            fi
+          fi
+      
+      - name: Upload Universal Binary
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: RTDink-macOS-Universal
+          path: OSX/build/Release/*.app
+          retention-days: 7
