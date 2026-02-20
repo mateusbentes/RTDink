@@ -22,8 +22,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          submodules: recursive
+      
+      - name: Clone Proton SDK
+        run: |
+          git clone https://github.com/SethRobinson/proton.git
       
       - name: System Info
         run: |
@@ -76,8 +78,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          submodules: recursive
+      
+      - name: Clone Proton SDK
+        run: |
+          git clone https://github.com/SethRobinson/proton.git
       
       - name: Build Universal Binary
         run: |
