@@ -97,7 +97,6 @@ proton/
 The macOS build uses the Xcode project at `OSX/RTDink.xcodeproj`.
 
 - **Supported architecture:** Apple Silicon (ARM64 / M1+). Intel (x86_64) is not currently supported.
-- **CI:** The `test_mac_arm64` branch runs a GitHub Actions workflow that builds and verifies the ARM64 binary on every push. The CI build skips FMOD (silent audio) so no proprietary SDK is needed to verify compilation.
 - **Audio:** Requires the **FMOD Studio API** for a fully functional build with sound (proprietary, free for non-commercial use).
 
 ### Directory layout
