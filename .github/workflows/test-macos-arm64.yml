@@ -26,6 +26,7 @@ jobs:
       - name: Clone Proton SDK
         run: |
           git clone https://github.com/SethRobinson/proton.git
+          ln -s proton/shared shared
       
       - name: System Info
         run: |
@@ -82,6 +83,7 @@ jobs:
       - name: Clone Proton SDK
         run: |
           git clone https://github.com/SethRobinson/proton.git
+          ln -s proton/shared shared
       
       - name: Build Universal Binary
         run: |
