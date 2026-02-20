@@ -1637,6 +1637,8 @@
 					../../shared/FliteTTS/include,
 					../../shared/OSX,
 					/Users/Seth/dev/rtsvn/projects/proton/locallibs,
+					/opt/homebrew/include,
+					/usr/local/include,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PREBINDING = NO;
@@ -1751,6 +1753,8 @@
 					../../shared/FliteTTS/include,
 					../../shared/OSX,
 					/Users/Seth/dev/rtsvn/projects/proton/locallibs,
+					/opt/homebrew/include,
+					/usr/local/include,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1787,6 +1791,8 @@
 					../../shared/FliteTTS/include,
 					../../shared/OSX,
 					/Users/Seth/dev/rtsvn/projects/proton/locallibs,
+					/opt/homebrew/include,
+					/usr/local/include,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PREBINDING = NO;
