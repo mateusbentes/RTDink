@@ -8,11 +8,10 @@ on:
   # Manual trigger - you control when it runs
   workflow_dispatch:
   
-  # Or automatically on pushes to your test branches
+  # Automatically run on pushes to this test branch
   push:
     branches:
-      - 'test/**'
-      - 'macos/**'
+      - 'test_mac_arm64'
 
 jobs:
   build-macos-arm64:
