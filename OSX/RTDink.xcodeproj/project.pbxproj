@@ -28,6 +28,7 @@
 		5D21B9FE1FA6C37E00B12CB3 /* AudioManagerFMODStudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D21B9FD1FA6C37E00B12CB3 /* AudioManagerFMODStudio.cpp */; };
 		5D21BA051FA6C3DD00B12CB3 /* AdProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D21BA021FA6C3DD00B12CB3 /* AdProvider.cpp */; };
 		AA000001000000000000AA01 /* EmulatedPointerComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA000002000000000000AA01 /* EmulatedPointerComponent.cpp */; };
+		AA000001000000000000AA06 /* TouchDragComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA000002000000000000AA06 /* TouchDragComponent.cpp */; };
 		AA000001000000000000AA02 /* LogDisplayComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA000002000000000000AA02 /* LogDisplayComponent.cpp */; };
 		AA000001000000000000AA03 /* arm_init.c in Sources */ = {isa = PBXBuildFile; fileRef = AA000002000000000000AA03 /* arm_init.c */; };
 		AA000001000000000000AA04 /* filter_neon_intrinsics.c in Sources */ = {isa = PBXBuildFile; fileRef = AA000002000000000000AA04 /* filter_neon_intrinsics.c */; };
@@ -249,6 +250,7 @@
 		5D21B9D11FA6C31B00B12CB3 /* pngrutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngrutil.c; path = ../../../shared/Irrlicht/source/Irrlicht/libpng/pngrutil.c; sourceTree = "<group>"; };
 		AA000002000000000000AA01 /* EmulatedPointerComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EmulatedPointerComponent.cpp; path = ../source/Component/EmulatedPointerComponent.cpp; sourceTree = SOURCE_ROOT; };
 		AA000002000000000000AA02 /* LogDisplayComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LogDisplayComponent.cpp; path = ../../shared/Entity/LogDisplayComponent.cpp; sourceTree = SOURCE_ROOT; };
+		AA000002000000000000AA06 /* TouchDragComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TouchDragComponent.cpp; path = ../../shared/Entity/TouchDragComponent.cpp; sourceTree = SOURCE_ROOT; };
 		AA000002000000000000AA03 /* arm_init.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = arm_init.c; path = ../../shared/Irrlicht/source/Irrlicht/libpng/arm/arm_init.c; sourceTree = SOURCE_ROOT; };
 		AA000002000000000000AA04 /* filter_neon_intrinsics.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = filter_neon_intrinsics.c; path = ../../shared/Irrlicht/source/Irrlicht/libpng/arm/filter_neon_intrinsics.c; sourceTree = SOURCE_ROOT; };
 		AA000002000000000000AA05 /* palette_neon_intrinsics.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = palette_neon_intrinsics.c; path = ../../shared/Irrlicht/source/Irrlicht/libpng/arm/palette_neon_intrinsics.c; sourceTree = SOURCE_ROOT; };
@@ -1571,6 +1573,7 @@
 				5D70C15812B72C0900A1AB17 /* FPSControlComponent.cpp in Sources */,
 				5D70C15912B72C0900A1AB17 /* ParticleTestComponent.cpp in Sources */,
 				AA000001000000000000AA01 /* EmulatedPointerComponent.cpp in Sources */,
+				AA000001000000000000AA06 /* TouchDragComponent.cpp in Sources */,
 				AA000001000000000000AA02 /* LogDisplayComponent.cpp in Sources */,
 				AA000001000000000000AA03 /* arm_init.c in Sources */,
 				AA000001000000000000AA04 /* filter_neon_intrinsics.c in Sources */,
