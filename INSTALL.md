@@ -10,7 +10,7 @@ See [README.md](README.md) for download links if you just want to play the game.
 | **Linux** | CMake | Proton SDK cloned inside project, uses SDL2 + SDL2_mixer for audio |
 | **iOS** | Xcode | Proton SDK sibling layout, uses FMOD for audio |
 | **Android** | Gradle + CMake | Proton SDK sibling layout, uses FMOD for audio |
-| **macOS** | Xcode | ARM64 + x86_64 (Apple Silicon + Intel), requires FMOD for audio (see [macOS section](#macos)) |
+| **macOS** | Xcode | Apple Silicon (ARM64), requires FMOD for audio (see [macOS section](#macos)) |
 | **HTML5** | Emscripten | See [Proton HTML5 setup](https://www.rtsoft.com/wiki/doku.php?id=proton:html5_setup) |
 
 All platforms require the **Dink Smallwood game data** (`dink/` directory) to play. See [README.md](README.md#just-want-to-play) for how to obtain it.
@@ -94,13 +94,15 @@ proton/
 
 ## macOS
 
-The macOS build uses the Xcode project at `OSX/RTDink.xcodeproj`. It requires the **FMOD Studio API** for audio (proprietary, free for non-commercial use).
+The macOS build uses the Xcode project at `OSX/RTDink.xcodeproj`.
 
-> **Note:** The CI workflow (`test_mac_arm64` branch) verifies the build compiles on Apple Silicon (M1/M2). FMOD is required to link a runnable binary.
+- **Supported architecture:** Apple Silicon (ARM64 / M1+). Intel (x86_64) is not currently supported.
+- **CI:** The `test_mac_arm64` branch runs a GitHub Actions workflow that builds and verifies the ARM64 binary on every push. The CI build skips FMOD (silent audio) so no proprietary SDK is needed to verify compilation.
+- **Audio:** Requires the **FMOD Studio API** for a fully functional build with sound (proprietary, free for non-commercial use).
 
 ### Directory layout
 
-Clone both repos as siblings:
+Clone both repos as **siblings** (not RTDink inside proton):
 
 ```
 some_folder/
@@ -144,7 +146,7 @@ open RTDink/OSX/RTDink.xcodeproj
 
 5. Select the **Release** configuration and build (`⌘B`).
 
-> **Without FMOD:** The project will fail to compile at `AudioManagerFMODStudio.cpp` because `fmod.hpp` is not found. FMOD is a hard dependency for the macOS Xcode build — there is no SDL2 audio fallback in this build path.
+> **Without FMOD:** The project compiles but has no audio. The CI workflow builds without FMOD using a silent stub. For a fully working game, FMOD is required.
 
 ---
 
