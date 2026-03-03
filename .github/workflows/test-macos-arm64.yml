@@ -65,6 +65,7 @@ jobs:
       - name: Build for ARM64
         run: |
           cd OSX
+          SDL2_PREFIX=$(brew --prefix sdl2)
           xcodebuild -project RTDink.xcodeproj \
             -configuration Release \
             -arch arm64 \
@@ -73,6 +74,10 @@ jobs:
             CODE_SIGNING_ALLOWED=NO \
             GCC_PREPROCESSOR_DEFINITIONS='$(inherited) RT_NO_FMOD=1' \
             EXCLUDED_SOURCE_FILE_NAMES="AudioManagerFMODStudio.cpp" \
+            FRAMEWORK_SEARCH_PATHS="" \
+            OTHER_LDFLAGS="-lSDL2" \
+            LIBRARY_SEARCH_PATHS="$(inherited) $SDL2_PREFIX/lib" \
+            HEADER_SEARCH_PATHS="$(inherited) $SDL2_PREFIX/include/SDL2" \
             build
       
       - name: Check Binary Architecture
