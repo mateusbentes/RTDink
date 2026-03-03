@@ -1656,6 +1656,7 @@
 					../../proton/RTSimpleApp/source,
 					/opt/homebrew/include,
 					/usr/local/include,
+					"$(HOME)/Library/Frameworks/SDL2.framework/Headers",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PREBINDING = NO;
@@ -1685,13 +1686,18 @@
 				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(HOME)/Library/Frameworks",
+					/opt/homebrew/Cellar/sdl2/2.30.9/Frameworks,
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					/opt/homebrew/lib,
 					/usr/local/lib,
 				);
-				OTHER_LDFLAGS = "-lSDL2";
+				OTHER_LDFLAGS = "-framework SDL2";
 				PRODUCT_NAME = "Dink Smallwood HD";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				CODE_SIGNING_REQUIRED = NO;
@@ -1715,13 +1721,18 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(HOME)/Library/Frameworks",
+					/opt/homebrew/Cellar/sdl2/2.30.9/Frameworks,
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					/opt/homebrew/lib,
 					/usr/local/lib,
 				);
-				OTHER_LDFLAGS = "-lSDL2";
+				OTHER_LDFLAGS = "-framework SDL2";
 				PRODUCT_NAME = "Dink Smallwood HD";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
@@ -1739,13 +1750,18 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				"EXCLUDED_SOURCE_FILE_NAMES[arch=x86_64]" = "arm_init.c filter_neon_intrinsics.c palette_neon_intrinsics.c filter_neon.S";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(HOME)/Library/Frameworks",
+					/opt/homebrew/Cellar/sdl2/2.30.9/Frameworks,
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					/opt/homebrew/lib,
 					/usr/local/lib,
 				);
-				OTHER_LDFLAGS = "-lSDL2";
+				OTHER_LDFLAGS = "-framework SDL2";
 				PRODUCT_NAME = "Dink Smallwood HD";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
@@ -1785,6 +1801,7 @@
 					../../proton/RTSimpleApp/source,
 					/opt/homebrew/include,
 					/usr/local/include,
+					"$(HOME)/Library/Frameworks/SDL2.framework/Headers",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1824,6 +1841,7 @@
 					../../proton/RTSimpleApp/source,
 					/opt/homebrew/include,
 					/usr/local/include,
+					"$(HOME)/Library/Frameworks/SDL2.framework/Headers",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PREBINDING = NO;
