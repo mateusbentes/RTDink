@@ -1702,7 +1702,7 @@
 					/opt/homebrew/lib,
 					/usr/local/lib,
 				);
-				OTHER_CFLAGS = "-Wno-deprecated-declarations -Wno-writable-strings -Wno-write-strings";
+				OTHER_CFLAGS = "-Wno-deprecated-declarations -Wno-writable-strings -Wno-write-strings -Wno-shorten-64-to-32 -Wno-conversion -Wno-sign-conversion -Wno-implicit-int-conversion -Wno-nullability-completeness -w";
 				OTHER_LDFLAGS = "-framework SDL2";
 				PRODUCT_NAME = "Dink Smallwood HD";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1739,7 +1739,7 @@
 					/opt/homebrew/lib,
 					/usr/local/lib,
 				);
-				OTHER_CFLAGS = "-Wno-deprecated-declarations -Wno-writable-strings -Wno-write-strings";
+				OTHER_CFLAGS = "-Wno-deprecated-declarations -Wno-writable-strings -Wno-write-strings -Wno-shorten-64-to-32 -Wno-conversion -Wno-sign-conversion -Wno-implicit-int-conversion -Wno-nullability-completeness -w";
 				OTHER_LDFLAGS = "-framework SDL2";
 				PRODUCT_NAME = "Dink Smallwood HD";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1770,7 +1770,7 @@
 					/opt/homebrew/lib,
 					/usr/local/lib,
 				);
-				OTHER_CFLAGS = "-Wno-deprecated-declarations -Wno-writable-strings -Wno-write-strings";
+				OTHER_CFLAGS = "-Wno-deprecated-declarations -Wno-writable-strings -Wno-write-strings -Wno-shorten-64-to-32 -Wno-conversion -Wno-sign-conversion -Wno-implicit-int-conversion -Wno-nullability-completeness -w";
 				OTHER_LDFLAGS = "-framework SDL2";
 				PRODUCT_NAME = "Dink Smallwood HD";
 				PROVISIONING_PROFILE_SPECIFIER = "";
