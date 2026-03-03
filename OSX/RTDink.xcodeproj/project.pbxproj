@@ -26,6 +26,7 @@
 		5D21B9FA1FA6C34500B12CB3 /* GamepadManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D21B9F61FA6C34500B12CB3 /* GamepadManager.cpp */; };
 		5D21B9FB1FA6C34500B12CB3 /* Gamepad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D21B9F81FA6C34500B12CB3 /* Gamepad.cpp */; };
 		5D21B9FE1FA6C37E00B12CB3 /* AudioManagerFMODStudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D21B9FD1FA6C37E00B12CB3 /* AudioManagerFMODStudio.cpp */; };
+		AA000004000000000000AA01 /* AudioManagerSDL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA000003000000000000AA01 /* AudioManagerSDL.cpp */; };
 		5D21BA051FA6C3DD00B12CB3 /* AdProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D21BA021FA6C3DD00B12CB3 /* AdProvider.cpp */; };
 		AA000001000000000000AA01 /* EmulatedPointerComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA000002000000000000AA01 /* EmulatedPointerComponent.cpp */; };
 		AA000001000000000000AA06 /* TouchDragComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA000002000000000000AA06 /* TouchDragComponent.cpp */; };
@@ -278,6 +279,8 @@
 		5D21B9F81FA6C34500B12CB3 /* Gamepad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Gamepad.cpp; path = ../../shared/Gamepad/Gamepad.cpp; sourceTree = "<group>"; };
 		5D21B9FC1FA6C37E00B12CB3 /* AudioManagerFMODStudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioManagerFMODStudio.h; path = ../../shared/Audio/AudioManagerFMODStudio.h; sourceTree = "<group>"; };
 		5D21B9FD1FA6C37E00B12CB3 /* AudioManagerFMODStudio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AudioManagerFMODStudio.cpp; path = ../../shared/Audio/AudioManagerFMODStudio.cpp; sourceTree = "<group>"; };
+		AA000003000000000000AA01 /* AudioManagerSDL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AudioManagerSDL.cpp; path = ../../shared/Audio/AudioManagerSDL.cpp; sourceTree = "<group>"; };
+		AA000003000000000000AA02 /* AudioManagerSDL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioManagerSDL.h; path = ../../shared/Audio/AudioManagerSDL.h; sourceTree = "<group>"; };
 		5D21B9FF1FA6C3DC00B12CB3 /* AdProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdProvider.h; path = ../../shared/Ad/AdProvider.h; sourceTree = "<group>"; };
 		5D21BA001FA6C3DC00B12CB3 /* GamepadiCade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GamepadiCade.h; path = ../../shared/Gamepad/GamepadiCade.h; sourceTree = "<group>"; };
 		5D21BA021FA6C3DD00B12CB3 /* AdProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AdProvider.cpp; path = ../../shared/Ad/AdProvider.cpp; sourceTree = "<group>"; };
@@ -894,6 +897,8 @@
 			children = (
 				5D21B9FD1FA6C37E00B12CB3 /* AudioManagerFMODStudio.cpp */,
 				5D21B9FC1FA6C37E00B12CB3 /* AudioManagerFMODStudio.h */,
+				AA000003000000000000AA01 /* AudioManagerSDL.cpp */,
+				AA000003000000000000AA02 /* AudioManagerSDL.h */,
 				5D70C01512B72BE700A1AB17 /* AudioManager.cpp */,
 				5D70C01612B72BE700A1AB17 /* AudioManager.h */,
 			);
@@ -1475,7 +1480,7 @@
 				5D70C0DA12B72BE700A1AB17 /* TyperComponent.cpp in Sources */,
 				5D70C0DB12B72BE700A1AB17 /* ProgressBarComponent.cpp in Sources */,
 				5D70C0DC12B72BE700A1AB17 /* TapSequenceDetectComponent.cpp in Sources */,
-				5D21B9FE1FA6C37E00B12CB3 /* AudioManagerFMODStudio.cpp in Sources */,
+				AA000004000000000000AA01 /* AudioManagerSDL.cpp in Sources */,
 				5D21B9F11FA6C31D00B12CB3 /* pngrtran.c in Sources */,
 				5D70C0DD12B72BE700A1AB17 /* UnderlineRenderComponent.cpp in Sources */,
 				5D70C0DE12B72BE700A1AB17 /* FocusInputComponent.cpp in Sources */,
@@ -1687,6 +1692,7 @@
 					RT_IPV6,
 					RT_JPG_SUPPORT,
 					C_GL_MODE,
+					RT_USE_SDL_AUDIO,
 				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
@@ -1703,7 +1709,7 @@
 					/usr/local/lib,
 				);
 				OTHER_CFLAGS = "-w -Wno-error -Wno-int-to-pointer-cast -Wno-pointer-to-int-cast";
-				OTHER_LDFLAGS = "-framework SDL2";
+				OTHER_LDFLAGS = "-framework SDL2 -lSDL2_mixer";
 				PRODUCT_NAME = "Dink Smallwood HD";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				CODE_SIGNING_REQUIRED = NO;
@@ -1740,7 +1746,7 @@
 					/usr/local/lib,
 				);
 				OTHER_CFLAGS = "-w -Wno-error -Wno-int-to-pointer-cast -Wno-pointer-to-int-cast";
-				OTHER_LDFLAGS = "-framework SDL2";
+				OTHER_LDFLAGS = "-framework SDL2 -lSDL2_mixer";
 				PRODUCT_NAME = "Dink Smallwood HD";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
@@ -1771,7 +1777,7 @@
 					/usr/local/lib,
 				);
 				OTHER_CFLAGS = "-w -Wno-error -Wno-int-to-pointer-cast -Wno-pointer-to-int-cast";
-				OTHER_LDFLAGS = "-framework SDL2";
+				OTHER_LDFLAGS = "-framework SDL2 -lSDL2_mixer";
 				PRODUCT_NAME = "Dink Smallwood HD";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
@@ -1797,6 +1803,7 @@
 					RT_IPV6,
 					RT_PNG_SUPPORT,
 					RT_CUSTOM_LOGMSG,
+					RT_USE_SDL_AUDIO,
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -1838,6 +1845,7 @@
 					RT_JPG_SUPPORT,
 					RT_IPV6,
 					RT_PNG_SUPPORT,
+					RT_USE_SDL_AUDIO,
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
