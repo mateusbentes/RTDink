@@ -97,7 +97,7 @@ proton/
 The macOS build uses the Xcode project at `OSX/RTDink.xcodeproj`.
 
 - **Supported architecture:** Apple Silicon (ARM64 / M1+). Intel (x86_64) is not currently supported.
-- **Audio:** Requires the **FMOD Studio API** for a fully functional build with sound (proprietary, free for non-commercial use).
+- **Audio:** Uses **SDL2_mixer** (same as Linux) — no proprietary dependencies required.
 
 ### Directory layout
 
