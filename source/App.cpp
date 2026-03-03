@@ -1421,12 +1421,21 @@ void App::AddTextToLog(const char *tex, const char *filename)
 
 		if (m_logFileHandle == NULL)
 		{
-
 			//open 'er up
 			m_logFileHandle = fopen(filename, "ab");
 			if (!m_logFileHandle)
 			{
-				assert(!"huh?");
+				// Save path may not exist yet, try to create it
+				string savePath = GetSavePath();
+				if (!savePath.empty())
+				{
+					mkdir(savePath.c_str(), 0755);
+					m_logFileHandle = fopen(filename, "ab");
+				}
+				if (!m_logFileHandle)
+				{
+					return; // silently fail, don't crash
+				}
 			}
 			return;
 		}
