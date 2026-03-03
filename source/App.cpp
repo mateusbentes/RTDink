@@ -89,15 +89,8 @@ GamepadManager * GetGamepadManager() {return &g_gamepadManager;}
   AudioManagerFMOD g_audioManager;
 #else
   //it's being compiled as a native OSX app
-#if defined RT_USE_SDL_AUDIO
 #include "Audio/AudioManagerSDL.h"
   AudioManagerSDL g_audioManager;
-#elif defined RT_NO_FMOD
-  AudioManager g_audioManager; //silent stub, no FMOD dependency
-#else
-#include "Audio/AudioManagerFMODStudio.h"
-  AudioManagerFMOD g_audioManager;
-#endif
 
   //in theory, CocosDenshion should work for the Mac builds, but right now it seems to want a big chunk of
   //Cocos2d included so I'm not fiddling with it for now
