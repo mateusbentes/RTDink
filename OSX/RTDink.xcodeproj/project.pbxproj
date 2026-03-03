@@ -89,7 +89,7 @@
 		5D70B62612B5FED300A1AB17 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D70B61E12B5FED300A1AB17 /* main.m */; };
 		5D70B62712B5FED300A1AB17 /* MainController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5D70B62012B5FED300A1AB17 /* MainController.mm */; };
 		5D70B62812B5FED300A1AB17 /* MyApplication.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5D70B62212B5FED300A1AB17 /* MyApplication.mm */; };
-		5D70B62912B5FED300A1AB17 /* MyOpenGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5D70B62412B5FED300A1AB17 /* MyOpenGLView.mm */; };
+		5D70B62912B5FED300A1AB17 /* MyOpenGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5D70B62412B5FED300A1AB17 /* MyOpenGLView.mm */; settings = {COMPILER_FLAGS = "-Wno-int-to-pointer-cast -Wno-pointer-to-int-cast -Wno-error=int-to-pointer-cast"; }; };
 		5D70B81112B606DC00A1AB17 /* PlatformSetup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D70B79C12B606DC00A1AB17 /* PlatformSetup.cpp */; };
 		5D70B81212B606DC00A1AB17 /* PlatformPrecomp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D70B79E12B606DC00A1AB17 /* PlatformPrecomp.cpp */; };
 		5D70B81312B606DC00A1AB17 /* BaseApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D70B79F12B606DC00A1AB17 /* BaseApp.cpp */; };
@@ -1702,7 +1702,7 @@
 					/opt/homebrew/lib,
 					/usr/local/lib,
 				);
-				OTHER_CFLAGS = "-Wno-deprecated-declarations -Wno-writable-strings -Wno-write-strings -Wno-shorten-64-to-32 -Wno-conversion -Wno-sign-conversion -Wno-implicit-int-conversion -Wno-nullability-completeness -w";
+				OTHER_CFLAGS = "-w -Wno-error -Wno-int-to-pointer-cast -Wno-pointer-to-int-cast";
 				OTHER_LDFLAGS = "-framework SDL2";
 				PRODUCT_NAME = "Dink Smallwood HD";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1739,7 +1739,7 @@
 					/opt/homebrew/lib,
 					/usr/local/lib,
 				);
-				OTHER_CFLAGS = "-Wno-deprecated-declarations -Wno-writable-strings -Wno-write-strings -Wno-shorten-64-to-32 -Wno-conversion -Wno-sign-conversion -Wno-implicit-int-conversion -Wno-nullability-completeness -w";
+				OTHER_CFLAGS = "-w -Wno-error -Wno-int-to-pointer-cast -Wno-pointer-to-int-cast";
 				OTHER_LDFLAGS = "-framework SDL2";
 				PRODUCT_NAME = "Dink Smallwood HD";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1770,7 +1770,7 @@
 					/opt/homebrew/lib,
 					/usr/local/lib,
 				);
-				OTHER_CFLAGS = "-Wno-deprecated-declarations -Wno-writable-strings -Wno-write-strings -Wno-shorten-64-to-32 -Wno-conversion -Wno-sign-conversion -Wno-implicit-int-conversion -Wno-nullability-completeness -w";
+				OTHER_CFLAGS = "-w -Wno-error -Wno-int-to-pointer-cast -Wno-pointer-to-int-cast";
 				OTHER_LDFLAGS = "-framework SDL2";
 				PRODUCT_NAME = "Dink Smallwood HD";
 				PROVISIONING_PROFILE_SPECIFIER = "";
