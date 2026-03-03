@@ -1640,7 +1640,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = ../../shared/PlatformPrecomp.h;
+				GCC_PREFIX_HEADER = "$(PROTON_SHARED)/PlatformPrecomp.h";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					BOOST_ALL_NO_LIB,
 					NDEBUG,
@@ -1650,11 +1650,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					../source,
-					../../shared,
-					../../shared/util/boost/,
-					"../../shared/ClanLib-2.0/Sources",
-					../../shared/FliteTTS/include,
-					../../shared/OSX,
+					"$(PROTON_SHARED)",
+					"$(PROTON_SHARED)/util/boost/",
+					"$(PROTON_SHARED)/ClanLib-2.0/Sources",
+					"$(PROTON_SHARED)/FliteTTS/include",
+					"$(PROTON_SHARED)/OSX",
 					/Users/Seth/dev/rtsvn/projects/proton/locallibs,
 					../../proton/RTSimpleApp/source,
 					/opt/homebrew/include,
@@ -1663,6 +1663,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PREBINDING = NO;
+				PROTON_SHARED = "../../shared";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
 				VALID_ARCHS = "arm64 x86_64";
@@ -1784,7 +1785,7 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = ../../shared/PlatformPrecomp.h;
+				GCC_PREFIX_HEADER = "$(PROTON_SHARED)/PlatformPrecomp.h";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_DEBUG,
 					BOOST_ALL_NO_LIB,
@@ -1798,11 +1799,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					../source,
-					../../shared,
-					../../shared/util/boost/,
-					"../../shared/ClanLib-2.0/Sources",
-					../../shared/FliteTTS/include,
-					../../shared/OSX,
+					"$(PROTON_SHARED)",
+					"$(PROTON_SHARED)/util/boost/",
+					"$(PROTON_SHARED)/ClanLib-2.0/Sources",
+					"$(PROTON_SHARED)/FliteTTS/include",
+					"$(PROTON_SHARED)/OSX",
 					/Users/Seth/dev/rtsvn/projects/proton/locallibs,
 					../../proton/RTSimpleApp/source,
 					/opt/homebrew/include,
@@ -1812,6 +1813,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
+				PROTON_SHARED = "../../shared";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -1824,7 +1826,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = ../../shared/PlatformPrecomp.h;
+				GCC_PREFIX_HEADER = "$(PROTON_SHARED)/PlatformPrecomp.h";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					BOOST_ALL_NO_LIB,
 					NDEBUG,
@@ -1838,11 +1840,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					../source,
-					../../shared,
-					../../shared/util/boost/,
-					"../../shared/ClanLib-2.0/Sources",
-					../../shared/FliteTTS/include,
-					../../shared/OSX,
+					"$(PROTON_SHARED)",
+					"$(PROTON_SHARED)/util/boost/",
+					"$(PROTON_SHARED)/ClanLib-2.0/Sources",
+					"$(PROTON_SHARED)/FliteTTS/include",
+					"$(PROTON_SHARED)/OSX",
 					/Users/Seth/dev/rtsvn/projects/proton/locallibs,
 					../../proton/RTSimpleApp/source,
 					/opt/homebrew/include,
@@ -1851,6 +1853,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PREBINDING = NO;
+				PROTON_SHARED = "../../shared";
 				SDKROOT = macosx;
 				VALID_ARCHS = "arm64 x86_64";
 			};
