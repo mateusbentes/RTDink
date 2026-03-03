@@ -1,0 +1,99 @@
+name: Test macOS ARM64 Build
+
+# This workflow only runs in YOUR fork
+# It won't affect Seth's repository
+# You can trigger it manually from GitHub Actions tab
+
+on:
+  # Manual trigger - you control when it runs
+  workflow_dispatch:
+  
+  # Automatically run on pushes to this test branch
+  push:
+    branches:
+      - 'test_mac_arm64'
+
+jobs:
+  build-macos-arm64:
+    name: Build on Apple Silicon
+    runs-on: macos-14  # This is Apple Silicon (M1)
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Clone Proton SDK
+        run: |
+          cd ..
+          git clone https://github.com/SethRobinson/proton.git
+          ln -s proton/shared shared
+          ls -la | grep shared
+          echo "Verifying shared directory is accessible from RTDink/OSX:"
+          cd RTDink/OSX
+          ls -la ../../shared/ | head -5
+      
+      - name: Create missing game directory
+        run: |
+          mkdir -p bin/game
+          echo "Placeholder for game assets" > bin/game/README.txt
+      
+      - name: System Info
+        run: |
+          echo "Architecture: $(uname -m)"
+          echo "macOS Version: $(sw_vers -productVersion)"
+          xcodebuild -version
+      
+      - name: Check Xcode Project
+        run: |
+          cd OSX
+          echo "Checking build settings..."
+          xcodebuild -project RTDink.xcodeproj -showBuildSettings | grep -E "ARCHS|VALID_ARCHS|MACOSX_DEPLOYMENT_TARGET"
+      
+      - name: Install SDL2
+        run: |
+          brew install sdl2
+          echo "SDL2 prefix: $(brew --prefix sdl2)"
+          ls -la $(brew --prefix sdl2)/
+          ls -la $(brew --prefix sdl2)/Frameworks/ 2>/dev/null || echo "No Frameworks dir"
+          ls -la /opt/homebrew/opt/sdl2/ 2>/dev/null || echo "No /opt/homebrew/opt/sdl2"
+
+      - name: Generate pnglibconf.h
+        run: |
+          LIBPNG=../shared/Irrlicht/source/Irrlicht/libpng
+          cp "$LIBPNG/pnglibconf.h.prebuilt" "$LIBPNG/pnglibconf.h"
+
+      - name: Build for ARM64
+        run: |
+          cd OSX
+          xcodebuild -project RTDink.xcodeproj \
+            -configuration Release \
+            -arch arm64 \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            GCC_PREPROCESSOR_DEFINITIONS='$(inherited) RT_NO_FMOD=1' \
+            EXCLUDED_SOURCE_FILE_NAMES="AudioManagerFMODStudio.cpp" \
+            build
+      
+      - name: Check Binary Architecture
+        run: |
+          cd OSX
+          APP=$(find build -name "*.app" -type d | head -1)
+          if [ -n "$APP" ]; then
+            BINARY="$APP/Contents/MacOS/$(basename "$APP" .app)"
+            if [ -f "$BINARY" ]; then
+              echo "Binary found: $BINARY"
+              file "$BINARY"
+              lipo -info "$BINARY" || true
+            fi
+          fi
+      
+      - name: Upload Build Artifact
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: RTDink-macOS-ARM64
+          path: OSX/build/Release/*.app
+          retention-days: 7
+
+

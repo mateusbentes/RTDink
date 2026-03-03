@@ -1692,7 +1692,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(HOME)/Library/Frameworks",
-					/opt/homebrew/Cellar/sdl2/2.30.9/Frameworks,
+					/opt/homebrew/opt/sdl2/Frameworks,
+					/usr/local/opt/sdl2/Frameworks,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1727,7 +1728,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(HOME)/Library/Frameworks",
-					/opt/homebrew/Cellar/sdl2/2.30.9/Frameworks,
+					/opt/homebrew/opt/sdl2/Frameworks,
+					/usr/local/opt/sdl2/Frameworks,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1756,7 +1758,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(HOME)/Library/Frameworks",
-					/opt/homebrew/Cellar/sdl2/2.30.9/Frameworks,
+					/opt/homebrew/opt/sdl2/Frameworks,
+					/usr/local/opt/sdl2/Frameworks,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
