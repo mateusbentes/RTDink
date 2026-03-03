@@ -50,7 +50,12 @@ jobs:
           xcodebuild -project RTDink.xcodeproj -showBuildSettings | grep -E "ARCHS|VALID_ARCHS|MACOSX_DEPLOYMENT_TARGET"
       
       - name: Install SDL2
-        run: brew install sdl2
+        run: |
+          brew install sdl2
+          echo "SDL2 prefix: $(brew --prefix sdl2)"
+          ls -la $(brew --prefix sdl2)/
+          ls -la $(brew --prefix sdl2)/Frameworks/ 2>/dev/null || echo "No Frameworks dir"
+          ls -la /opt/homebrew/opt/sdl2/ 2>/dev/null || echo "No /opt/homebrew/opt/sdl2"
 
       - name: Generate pnglibconf.h
         run: |
