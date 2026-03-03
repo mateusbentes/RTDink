@@ -210,7 +210,6 @@
 		5D70C16912B72C0900A1AB17 /* DebugMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D70C14B12B72C0900A1AB17 /* DebugMenu.cpp */; };
 		5D70C16A12B72C0900A1AB17 /* MainMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D70C14D12B72C0900A1AB17 /* MainMenu.cpp */; };
 		5D8FA3AC12DA754700E9B3B8 /* interface in Resources */ = {isa = PBXBuildFile; fileRef = 5D8FA3AB12DA754700E9B3B8 /* interface */; };
-		5D8FA49F12DBFA1100E9B3B8 /* game in Resources */ = {isa = PBXBuildFile; fileRef = 5D8FA49D12DBFA1100E9B3B8 /* game */; };
 		5D8FA52212DBFA3100E9B3B8 /* dink in Resources */ = {isa = PBXBuildFile; fileRef = 5D8FA4A012DBFA3000E9B3B8 /* dink */; };
 		5D8FA52312DBFA3100E9B3B8 /* audio in Resources */ = {isa = PBXBuildFile; fileRef = 5D8FA51512DBFA3100E9B3B8 /* audio */; };
 		5DBEA04C1FA6C94C0081C341 /* jcsample.c in Sources */ = {isa = PBXBuildFile; fileRef = 5DBEA04B1FA6C94C0081C341 /* jcsample.c */; };
@@ -590,7 +589,6 @@
 		5D70C14D12B72C0900A1AB17 /* MainMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MainMenu.cpp; path = ../source/GUI/MainMenu.cpp; sourceTree = SOURCE_ROOT; };
 		5D70C14E12B72C0900A1AB17 /* MainMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainMenu.h; path = ../source/GUI/MainMenu.h; sourceTree = SOURCE_ROOT; };
 		5D8FA3AB12DA754700E9B3B8 /* interface */ = {isa = PBXFileReference; lastKnownFileType = folder; name = interface; path = ../bin/interface; sourceTree = "<group>"; };
-		5D8FA49D12DBFA1100E9B3B8 /* game */ = {isa = PBXFileReference; lastKnownFileType = folder; name = game; path = ../bin/game; sourceTree = "<group>"; };
 		5D8FA4A012DBFA3000E9B3B8 /* dink */ = {isa = PBXFileReference; lastKnownFileType = folder; name = dink; path = ../bin/dink; sourceTree = "<group>"; };
 		5D8FA51512DBFA3100E9B3B8 /* audio */ = {isa = PBXFileReference; lastKnownFileType = folder; name = audio; path = ../bin/audio; sourceTree = "<group>"; };
 		5DBEA04B1FA6C94C0081C341 /* jcsample.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jcsample.c; path = ../../../shared/Irrlicht/source/Irrlicht/jpeglib/jcsample.c; sourceTree = "<group>"; };
@@ -1332,8 +1330,7 @@
 				5DFB850A12BAEDB500337543 /* app.icns in Resources */,
 				5DD32A5A12CAE4340009B0F3 /* Info.plist in Resources */,
 				5D8FA3AC12DA754700E9B3B8 /* interface in Resources */,
-				5D8FA49F12DBFA1100E9B3B8 /* game in Resources */,
-				5D8FA52212DBFA3100E9B3B8 /* dink in Resources */,
+					5D8FA52212DBFA3100E9B3B8 /* dink in Resources */,
 				5D8FA52312DBFA3100E9B3B8 /* audio in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
