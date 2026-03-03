@@ -1351,7 +1351,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = "/bin/sh -x";
-			shellScript = "install_name_tool -change @rpath/libfmod.dylib @loader_path/../Frameworks/libfmod.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\"\notool -L \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\"";
+			shellScript = "if [ -f \"$PROJECT_DIR/libfmod.dylib\" ]; then\n  install_name_tool -change @rpath/libfmod.dylib @loader_path/../Frameworks/libfmod.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\"\nfi\notool -L \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\"";
 		};
 		5DBEA04E1FA6D2CF0081C341 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
