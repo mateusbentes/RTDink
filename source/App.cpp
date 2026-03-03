@@ -1429,7 +1429,11 @@ void App::AddTextToLog(const char *tex, const char *filename)
 				string savePath = GetSavePath();
 				if (!savePath.empty())
 				{
+#ifdef _WIN32
+					_mkdir(savePath.c_str());
+#else
 					mkdir(savePath.c_str(), 0755);
+#endif
 					m_logFileHandle = fopen(filename, "ab");
 				}
 				if (!m_logFileHandle)
