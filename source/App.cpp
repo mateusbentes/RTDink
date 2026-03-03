@@ -6,6 +6,9 @@
  */
 #include "PlatformPrecomp.h"
 #include "App.h"
+#ifndef _WIN32
+#include <sys/stat.h>
+#endif
 #include "GUI/MainMenu.h"
 #include "Entity/EntityUtils.h"//create the classes that our globally library expects to exist somewhere.
 #include "dink/dink.h"
