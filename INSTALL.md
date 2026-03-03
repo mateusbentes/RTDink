@@ -130,12 +130,15 @@ brew install sdl2
 
 3. Download the **FMOD Studio API** from https://www.fmod.com/download (free registration required).
    - Choose **FMOD Engine** → **macOS**
-   - Extract and copy the `api/` folder into `proton/shared/mac/fmodstudio/` so the path looks like:
+   - Extract and copy the FMOD headers into `proton/shared/OSX/` so the path looks like:
      ```
-     proton/shared/mac/fmodstudio/api/core/inc/fmod.hpp
-     proton/shared/mac/fmodstudio/api/core/lib/libfmod.dylib
+     proton/shared/OSX/fmod.hpp
+     proton/shared/OSX/fmod_studio.hpp
      ```
-   - Also copy `libfmod.dylib` into `RTDink/OSX/` (next to the `.xcodeproj`)
+   - Copy `libfmod.dylib` into `RTDink/OSX/` (next to the `.xcodeproj`):
+     ```
+     RTDink/OSX/libfmod.dylib
+     ```
 
 4. Open the Xcode project:
 
