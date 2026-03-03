@@ -122,11 +122,23 @@ git clone https://github.com/SethRobinson/proton.git
 git clone https://github.com/SethRobinson/RTDink.git
 ```
 
-2. Install SDL2 via Homebrew:
+2. Install SDL2:
 
-```bash
-brew install sdl2
-```
+   **Option A — Homebrew** (if you have admin access):
+   ```bash
+   brew install sdl2
+   ```
+
+   **Option B — No admin access** (e.g. MacInCloud or shared machines):
+   ```bash
+   # Download the official SDL2 framework DMG
+   curl -L -o ~/SDL2.dmg "https://github.com/libsdl-org/SDL/releases/download/release-2.30.9/SDL2-2.30.9.dmg"
+   hdiutil attach ~/SDL2.dmg
+   mkdir -p ~/Library/Frameworks
+   cp -r /Volumes/SDL2/SDL2.framework ~/Library/Frameworks/
+   hdiutil detach /Volumes/SDL2
+   ```
+   The Xcode project looks for `SDL2.framework` in `~/Library/Frameworks/` automatically — no admin or Homebrew required.
 
 3. Download the **FMOD Studio API** from https://www.fmod.com/download (free registration required).
    - Choose **FMOD Engine** → **macOS**
