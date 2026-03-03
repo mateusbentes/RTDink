@@ -1709,7 +1709,7 @@
 					/usr/local/lib,
 				);
 				OTHER_CFLAGS = "-w -Wno-error -Wno-int-to-pointer-cast -Wno-pointer-to-int-cast";
-				OTHER_LDFLAGS = "-framework SDL2 -lSDL2_mixer";
+				OTHER_LDFLAGS = "-framework SDL2 -framework SDL2_mixer";
 				PRODUCT_NAME = "Dink Smallwood HD";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				CODE_SIGNING_REQUIRED = NO;
@@ -1746,7 +1746,7 @@
 					/usr/local/lib,
 				);
 				OTHER_CFLAGS = "-w -Wno-error -Wno-int-to-pointer-cast -Wno-pointer-to-int-cast";
-				OTHER_LDFLAGS = "-framework SDL2 -lSDL2_mixer";
+				OTHER_LDFLAGS = "-framework SDL2 -framework SDL2_mixer";
 				PRODUCT_NAME = "Dink Smallwood HD";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
@@ -1777,7 +1777,7 @@
 					/usr/local/lib,
 				);
 				OTHER_CFLAGS = "-w -Wno-error -Wno-int-to-pointer-cast -Wno-pointer-to-int-cast";
-				OTHER_LDFLAGS = "-framework SDL2 -lSDL2_mixer";
+				OTHER_LDFLAGS = "-framework SDL2 -framework SDL2_mixer";
 				PRODUCT_NAME = "Dink Smallwood HD";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};

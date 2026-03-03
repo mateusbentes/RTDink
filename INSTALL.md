@@ -10,7 +10,7 @@ See [README.md](README.md) for download links if you just want to play the game.
 | **Linux** | CMake | Proton SDK cloned inside project, uses SDL2 + SDL2_mixer for audio |
 | **iOS** | Xcode | Proton SDK sibling layout, uses FMOD for audio |
 | **Android** | Gradle + CMake | Proton SDK sibling layout, uses FMOD for audio |
-| **macOS** | Xcode | Apple Silicon (ARM64), requires FMOD for audio (see [macOS section](#macos)) |
+| **macOS** | Xcode | Apple Silicon (ARM64), uses SDL2_mixer for audio (see [macOS section](#macos)) |
 | **HTML5** | Emscripten | See [Proton HTML5 setup](https://www.rtsoft.com/wiki/doku.php?id=proton:html5_setup) |
 
 All platforms require the **Dink Smallwood game data** (`dink/` directory) to play. See [README.md](README.md#just-want-to-play) for how to obtain it.
@@ -122,45 +122,39 @@ git clone https://github.com/SethRobinson/proton.git
 git clone https://github.com/SethRobinson/RTDink.git
 ```
 
-2. Install SDL2:
+2. Install **SDL2** and **SDL2_mixer**:
 
    **Option A — Homebrew** (if you have admin access):
    ```bash
-   brew install sdl2
+   brew install sdl2 sdl2_mixer
    ```
 
    **Option B — No admin access** (e.g. MacInCloud or shared machines):
    ```bash
-   # Download the official SDL2 framework DMG
+   # SDL2 framework
    curl -L -o ~/SDL2.dmg "https://github.com/libsdl-org/SDL/releases/download/release-2.30.9/SDL2-2.30.9.dmg"
    hdiutil attach ~/SDL2.dmg
    mkdir -p ~/Library/Frameworks
    cp -r /Volumes/SDL2/SDL2.framework ~/Library/Frameworks/
    hdiutil detach /Volumes/SDL2
+
+   # SDL2_mixer framework
+   curl -L -o ~/SDL2_mixer.dmg "https://github.com/libsdl-org/SDL_mixer/releases/download/release-2.8.0/SDL2_mixer-2.8.0.dmg"
+   hdiutil attach ~/SDL2_mixer.dmg
+   cp -r "/Volumes/SDL2_mixer/SDL2_mixer.framework" ~/Library/Frameworks/
+   hdiutil detach /Volumes/SDL2_mixer
    ```
-   The Xcode project looks for `SDL2.framework` in `~/Library/Frameworks/` automatically — no admin or Homebrew required.
+   The Xcode project looks for both frameworks in `~/Library/Frameworks/` automatically — no admin or Homebrew required.
 
-3. Download the **FMOD Studio API** from https://www.fmod.com/download (free registration required).
-   - Choose **FMOD Engine** → **macOS**
-   - Extract and copy the FMOD headers into `proton/shared/OSX/` so the path looks like:
-     ```
-     proton/shared/OSX/fmod.hpp
-     proton/shared/OSX/fmod_studio.hpp
-     ```
-   - Copy `libfmod.dylib` into `RTDink/OSX/` (next to the `.xcodeproj`):
-     ```
-     RTDink/OSX/libfmod.dylib
-     ```
-
-4. Open the Xcode project:
+3. Open the Xcode project:
 
 ```bash
 open RTDink/OSX/RTDink.xcodeproj
 ```
 
-5. Select the **Release** configuration and build (`⌘B`).
+4. Select the **Release** configuration and build (`⌘B`).
 
-> **Without FMOD:** The project compiles but has no audio. The CI workflow builds without FMOD using a silent stub. For a fully working game, FMOD is required.
+> **Audio:** The macOS build uses SDL2_mixer for audio (same as Linux) — no FMOD required.
 
 ---
 
