@@ -73,7 +73,7 @@ jobs:
             CODE_SIGNING_ALLOWED=NO \
             FRAMEWORK_SEARCH_PATHS="" \
             OTHER_LDFLAGS="-lSDL2 -lSDL2_mixer" \
-            OTHER_CFLAGS="-I$SDL2_PREFIX/include/SDL2 -I$SDL2_MIXER_PREFIX/include/SDL2" \
+            OTHER_CFLAGS="-I$SDL2_PREFIX/include/SDL2 -I$SDL2_MIXER_PREFIX/include/SDL2 -DGL_SILENCE_DEPRECATION" \
             LIBRARY_SEARCH_PATHS="$SDL2_PREFIX/lib $SDL2_MIXER_PREFIX/lib /opt/homebrew/lib /usr/local/lib" \
             build
       
