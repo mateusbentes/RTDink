@@ -1394,7 +1394,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Try all known proton/shared layouts\nfor LIBPNG in \\\n  \"$SRCROOT/../../shared/Irrlicht/source/Irrlicht/libpng\" \\\n  \"$SRCROOT/../../proton/shared/Irrlicht/source/Irrlicht/libpng\" \\\n  \"$SRCROOT/../proton/shared/Irrlicht/source/Irrlicht/libpng\" \\\n  \"$SRCROOT/../shared/Irrlicht/source/Irrlicht/libpng\"; do\n  if [ -d \"$LIBPNG\" ]; then\n    if [ ! -f \"$LIBPNG/pnglibconf.h\" ] && [ -f \"$LIBPNG/pnglibconf.h.prebuilt\" ]; then\n      cp \"$LIBPNG/pnglibconf.h.prebuilt\" \"$LIBPNG/pnglibconf.h\"\n      echo \"Copied pnglibconf.h from $LIBPNG\"\n    fi\n    break\n  fi\ndone\n";
+			shellScript = "# Create shared symlink if needed (supports proton cloned inside repo)\nSHARED_SIBLING=\"$SRCROOT/../../shared\"\nPROTON_INSIDE=\"$SRCROOT/../proton/shared\"\nif [ ! -d \"$SHARED_SIBLING\" ] && [ -d \"$PROTON_INSIDE\" ]; then\n  echo \"Creating shared symlink: $SHARED_SIBLING -> $PROTON_INSIDE\"\n  ln -sf \"$PROTON_INSIDE\" \"$SHARED_SIBLING\"\nfi\n\n# Generate pnglibconf.h\nLIBPNG=\"$SRCROOT/../../shared/Irrlicht/source/Irrlicht/libpng\"\nif [ -d \"$LIBPNG\" ] && [ ! -f \"$LIBPNG/pnglibconf.h\" ] && [ -f \"$LIBPNG/pnglibconf.h.prebuilt\" ]; then\n  cp \"$LIBPNG/pnglibconf.h.prebuilt\" \"$LIBPNG/pnglibconf.h\"\n  echo \"Copied pnglibconf.h from $LIBPNG\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1640,7 +1640,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(PROTON_SHARED)/PlatformPrecomp.h";
+				GCC_PREFIX_HEADER = ../../shared/PlatformPrecomp.h;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					BOOST_ALL_NO_LIB,
 					NDEBUG,
@@ -1650,11 +1650,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					../source,
-					"$(PROTON_SHARED)",
-					"$(PROTON_SHARED)/util/boost/",
-					"$(PROTON_SHARED)/ClanLib-2.0/Sources",
-					"$(PROTON_SHARED)/FliteTTS/include",
-					"$(PROTON_SHARED)/OSX",
+					../../shared,
+					../../shared/util/boost/,
+					"../../shared/ClanLib-2.0/Sources",
+					../../shared/FliteTTS/include,
+					../../shared/OSX,
 					/Users/Seth/dev/rtsvn/projects/proton/locallibs,
 					../../proton/RTSimpleApp/source,
 					/opt/homebrew/include,
@@ -1663,7 +1663,6 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PREBINDING = NO;
-				PROTON_SHARED = "../../shared";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
 				VALID_ARCHS = "arm64 x86_64";
@@ -1785,7 +1784,7 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(PROTON_SHARED)/PlatformPrecomp.h";
+				GCC_PREFIX_HEADER = ../../shared/PlatformPrecomp.h;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_DEBUG,
 					BOOST_ALL_NO_LIB,
@@ -1799,11 +1798,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					../source,
-					"$(PROTON_SHARED)",
-					"$(PROTON_SHARED)/util/boost/",
-					"$(PROTON_SHARED)/ClanLib-2.0/Sources",
-					"$(PROTON_SHARED)/FliteTTS/include",
-					"$(PROTON_SHARED)/OSX",
+					../../shared,
+					../../shared/util/boost/,
+					"../../shared/ClanLib-2.0/Sources",
+					../../shared/FliteTTS/include,
+					../../shared/OSX,
 					/Users/Seth/dev/rtsvn/projects/proton/locallibs,
 					../../proton/RTSimpleApp/source,
 					/opt/homebrew/include,
@@ -1813,7 +1812,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				PROTON_SHARED = "../../shared";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -1826,7 +1824,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(PROTON_SHARED)/PlatformPrecomp.h";
+				GCC_PREFIX_HEADER = ../../shared/PlatformPrecomp.h;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					BOOST_ALL_NO_LIB,
 					NDEBUG,
@@ -1840,11 +1838,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					../source,
-					"$(PROTON_SHARED)",
-					"$(PROTON_SHARED)/util/boost/",
-					"$(PROTON_SHARED)/ClanLib-2.0/Sources",
-					"$(PROTON_SHARED)/FliteTTS/include",
-					"$(PROTON_SHARED)/OSX",
+					../../shared,
+					../../shared/util/boost/,
+					"../../shared/ClanLib-2.0/Sources",
+					../../shared/FliteTTS/include,
+					../../shared/OSX,
 					/Users/Seth/dev/rtsvn/projects/proton/locallibs,
 					../../proton/RTSimpleApp/source,
 					/opt/homebrew/include,
@@ -1853,7 +1851,6 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PREBINDING = NO;
-				PROTON_SHARED = "../../shared";
 				SDKROOT = macosx;
 				VALID_ARCHS = "arm64 x86_64";
 			};
