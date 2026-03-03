@@ -1666,6 +1666,9 @@
 					/opt/homebrew/include,
 					/usr/local/include,
 					"$(HOME)/Library/Frameworks/SDL2.framework/Headers",
+					"$(HOME)/Library/Frameworks/SDL2_mixer.framework/Headers",
+					/opt/homebrew/opt/sdl2_mixer/include/SDL2,
+					/usr/local/opt/sdl2_mixer/include/SDL2,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PREBINDING = NO;
@@ -1701,6 +1704,8 @@
 					"$(HOME)/Library/Frameworks",
 					/opt/homebrew/opt/sdl2/Frameworks,
 					/usr/local/opt/sdl2/Frameworks,
+					/opt/homebrew/opt/sdl2_mixer/Frameworks,
+					/usr/local/opt/sdl2_mixer/Frameworks,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1738,6 +1743,8 @@
 					"$(HOME)/Library/Frameworks",
 					/opt/homebrew/opt/sdl2/Frameworks,
 					/usr/local/opt/sdl2/Frameworks,
+					/opt/homebrew/opt/sdl2_mixer/Frameworks,
+					/usr/local/opt/sdl2_mixer/Frameworks,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1769,6 +1776,8 @@
 					"$(HOME)/Library/Frameworks",
 					/opt/homebrew/opt/sdl2/Frameworks,
 					/usr/local/opt/sdl2/Frameworks,
+					/opt/homebrew/opt/sdl2_mixer/Frameworks,
+					/usr/local/opt/sdl2_mixer/Frameworks,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1820,6 +1829,9 @@
 					/opt/homebrew/include,
 					/usr/local/include,
 					"$(HOME)/Library/Frameworks/SDL2.framework/Headers",
+					"$(HOME)/Library/Frameworks/SDL2_mixer.framework/Headers",
+					/opt/homebrew/opt/sdl2_mixer/include/SDL2,
+					/usr/local/opt/sdl2_mixer/include/SDL2,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1862,6 +1874,9 @@
 					/opt/homebrew/include,
 					/usr/local/include,
 					"$(HOME)/Library/Frameworks/SDL2.framework/Headers",
+					"$(HOME)/Library/Frameworks/SDL2_mixer.framework/Headers",
+					/opt/homebrew/opt/sdl2_mixer/include/SDL2,
+					/usr/local/opt/sdl2_mixer/include/SDL2,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PREBINDING = NO;
