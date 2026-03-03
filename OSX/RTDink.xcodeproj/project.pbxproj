@@ -1340,21 +1340,22 @@
 /* Begin PBXShellScriptBuildPhase section */
 		5D8CE30414C6570D009EB534 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"",
 			);
 			name = "Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = "/bin/sh -x";
-			shellScript = "if [ -f \"$PROJECT_DIR/libfmod.dylib\" ]; then\n  install_name_tool -change @rpath/libfmod.dylib @loader_path/../Frameworks/libfmod.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\"\nfi\notool -L \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\"";
+			shellPath = /bin/sh;
+			shellScript = "if [ -f \"$PROJECT_DIR/libfmod.dylib\" ]; then\n  install_name_tool -change @rpath/libfmod.dylib @loader_path/../Frameworks/libfmod.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\"\nfi\nif [ -f \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\" ]; then\n  otool -L \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\"\nfi\n";
 		};
 		5DBEA04E1FA6D2CF0081C341 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -1368,6 +1369,7 @@
 		};
 		5DBEA0501FA6DBE30081C341 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 12;
 			files = (
 			);
@@ -1381,6 +1383,7 @@
 		};
 		AF0000001000000000000001 /* Generate pnglibconf.h */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
