@@ -1394,7 +1394,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Try standard path (RTDink sibling of proton/shared)\nLIBPNG=\"$SRCROOT/../../shared/Irrlicht/source/Irrlicht/libpng\"\n# Also try direct proton path\nif [ ! -d \"$LIBPNG\" ]; then\n  LIBPNG=\"$SRCROOT/../../proton/shared/Irrlicht/source/Irrlicht/libpng\"\nfi\nif [ ! -f \"$LIBPNG/pnglibconf.h\" ]; then\n  if [ -f \"$LIBPNG/pnglibconf.h.prebuilt\" ]; then\n    cp \"$LIBPNG/pnglibconf.h.prebuilt\" \"$LIBPNG/pnglibconf.h\"\n    echo \"Copied pnglibconf.h from $LIBPNG\"\n  else\n    echo \"Warning: pnglibconf.h.prebuilt not found at $LIBPNG, skipping\"\n  fi\nfi\n";
+			shellScript = "# Try all known proton/shared layouts\nfor LIBPNG in \\\n  \"$SRCROOT/../../shared/Irrlicht/source/Irrlicht/libpng\" \\\n  \"$SRCROOT/../../proton/shared/Irrlicht/source/Irrlicht/libpng\" \\\n  \"$SRCROOT/../proton/shared/Irrlicht/source/Irrlicht/libpng\" \\\n  \"$SRCROOT/../shared/Irrlicht/source/Irrlicht/libpng\"; do\n  if [ -d \"$LIBPNG\" ]; then\n    if [ ! -f \"$LIBPNG/pnglibconf.h\" ] && [ -f \"$LIBPNG/pnglibconf.h.prebuilt\" ]; then\n      cp \"$LIBPNG/pnglibconf.h.prebuilt\" \"$LIBPNG/pnglibconf.h\"\n      echo \"Copied pnglibconf.h from $LIBPNG\"\n    fi\n    break\n  fi\ndone\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
