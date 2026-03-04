@@ -835,10 +835,9 @@ GetGamepadManager()->AddProvider(new GamepadProviderSDL2());
 	}
 
 if (fullscreen)
-{
-LogMsg("Setting fullscreen...");
-g_bIsFullScreen = false; //because we're using toggle..
-OnFullscreenToggleRequestMultiplatform();
+{LogMsg("Setting fullscreen...");
+	g_bIsFullScreen = false; //because we're using toggle..
+	OnFullscreenToggleRequestMultiplatform();
 }
 
 #endif
