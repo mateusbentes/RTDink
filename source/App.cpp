@@ -658,7 +658,7 @@ bool App::Init()
 	GetGamepadManager()->AddProvider(pTempDirectX); //use directx joysticks
 	#endif
 
-#if defined(RTLINUX) || defined(PLATFORM_LINUX)
+#if defined(RTLINUX) || defined(PLATFORM_LINUX) || defined(PLATFORM_OSX)
 	GetGamepadManager()->AddProvider(new GamepadProviderSDL2());
 #endif
 
