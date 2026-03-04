@@ -94,7 +94,11 @@ GamepadManager * GetGamepadManager() {return &g_gamepadManager;}
   //it's being compiled as a native OSX app
 #include "Audio/AudioManagerSDL.h"
 #include "Gamepad/GamepadProviderSDL2.h"
+#include <SDL2/SDL.h>
   AudioManagerSDL g_audioManager;
+
+// Define the SDL event signal used by GamepadProviderSDL2 on macOS
+boost::signals2::signal<void(VariantList*)> g_sig_SDLEvent;
 
   //in theory, CocosDenshion should work for the Mac builds, but right now it seems to want a big chunk of
   //Cocos2d included so I'm not fiddling with it for now
@@ -660,6 +664,9 @@ bool App::Init()
 	#endif
 
 #if defined(RTLINUX) || defined(PLATFORM_LINUX) || defined(PLATFORM_OSX)
+#ifdef PLATFORM_OSX
+	SDL_InitSubSystem(SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER);
+#endif
 	GetGamepadManager()->AddProvider(new GamepadProviderSDL2());
 #endif
 
@@ -930,6 +937,21 @@ void App::Update()
 {
 	BaseApp::Update();
 	m_adManager.Update();
+
+#ifdef PLATFORM_OSX
+	// macOS uses Cocoa event loop, not SDL2Main, so poll SDL joystick events
+	// and fire the signal that GamepadProviderSDL2 listens to.
+	{
+		SDL_Event ev;
+		while (SDL_PollEvent(&ev))
+		{
+			VariantList v;
+			v.Get(0).Set((void*)&ev);
+			g_sig_SDLEvent(&v);
+		}
+	}
+#endif
+
 	g_gamepadManager.Update();
 
 	if (!m_bDidPostInit)
