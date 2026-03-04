@@ -937,7 +937,7 @@ void App::AddDroidKeyboardKeys()
 void App::Update()
 {
 	BaseApp::Update();
-m_adManager.Update();
+	m_adManager.Update();
 
 #ifdef PLATFORM_OSX
 {
