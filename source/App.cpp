@@ -205,7 +205,7 @@ const char * GetAppName()
 	return "Dink Smallwood HD";
 };
 
-#if defined(RTLINUX) || defined(PLATFORM_LINUX) || defined(PLATFORM_OSX)
+#if defined(RTLINUX) || defined(PLATFORM_LINUX)
 
 #include <SDL2/SDL.h>
 
@@ -270,11 +270,11 @@ void OnFullscreenToggleRequestMultiplatform() {
     UpdateViewport(width, height);
 }
 
-#endif // RTLINUX || PLATFORM_LINUX || PLATFORM_OSX
+#endif // RTLINUX || PLATFORM_LINUX
 
 void App::OnFullscreenToggleRequest()
 {
-#if defined(RTLINUX) || defined(PLATFORM_LINUX) || defined(PLATFORM_OSX)
+#if defined(RTLINUX) || defined(PLATFORM_LINUX)
     OnFullscreenToggleRequestMultiplatform();
 #else
     BaseApp::OnFullscreenToggleRequest();
@@ -670,7 +670,6 @@ if (SDL_InitSubSystem(SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER) != 0)
 #endif
 GetGamepadManager()->AddProvider(new GamepadProviderSDL2());
 #endif
-
     if (GetVar("check_icade")->GetUINT32() != 0)
 	{
 		AddIcadeProvider();
@@ -1062,7 +1061,7 @@ void App::OnScreenSizeChange()
 	BaseApp::OnScreenSizeChange();
 	if (GetPrimaryGLX() != 0)
 	{
-#if defined(RTLINUX) || defined(PLATFORM_LINUX) || defined(PLATFORM_OSX)
+#if defined(RTLINUX) || defined(PLATFORM_LINUX)
 		UpdateViewport(GetPrimaryGLX(), GetPrimaryGLY());
 #endif
 		SetupOrtho();
