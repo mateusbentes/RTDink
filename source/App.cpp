@@ -93,6 +93,7 @@ GamepadManager * GetGamepadManager() {return &g_gamepadManager;}
 #else
   //it's being compiled as a native OSX app
 #include "Audio/AudioManagerSDL.h"
+#include "Gamepad/GamepadProviderSDL2.h"
   AudioManagerSDL g_audioManager;
 
   //in theory, CocosDenshion should work for the Mac builds, but right now it seems to want a big chunk of
