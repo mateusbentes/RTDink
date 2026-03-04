@@ -664,6 +664,10 @@ bool App::Init()
 	#endif
 
 #if defined(RTLINUX) || defined(PLATFORM_LINUX) || defined(PLATFORM_OSX)
+#ifdef PLATFORM_OSX
+if (SDL_InitSubSystem(SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER) != 0)
+    LogMsg("SDL joystick init failed: %s", SDL_GetError());
+#endif
 GetGamepadManager()->AddProvider(new GamepadProviderSDL2());
 #endif
 
@@ -933,7 +937,19 @@ void App::AddDroidKeyboardKeys()
 void App::Update()
 {
 	BaseApp::Update();
-	m_adManager.Update();
+m_adManager.Update();
+
+#ifdef PLATFORM_OSX
+{
+    SDL_Event ev;
+    while (SDL_PollEvent(&ev))
+    {
+        VariantList v;
+        v.Get(0).Set((Entity*)&ev);
+        g_sig_SDLEvent(&v);
+    }
+}
+#endif
 
 g_gamepadManager.Update();
 
