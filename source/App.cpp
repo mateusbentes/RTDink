@@ -827,12 +827,16 @@ GetGamepadManager()->AddProvider(new GamepadProviderSDL2());
 		g_script_debug_mode = true;
 	}
 
-	if (fullscreen)
-	{
-		LogMsg("Setting fullscreen...");
-		g_bIsFullScreen = false; //because we're using toggle..
-		OnFullscreenToggleRequestMultiplatform();
-	}
+if (fullscreen)
+{
+LogMsg("Setting fullscreen...");
+g_bIsFullScreen = false; //because we're using toggle..
+#if defined(RTLINUX) || defined(PLATFORM_LINUX)
+OnFullscreenToggleRequestMultiplatform();
+#else
+BaseApp::OnFullscreenToggleRequest();
+#endif
+}
 
 #endif
 
