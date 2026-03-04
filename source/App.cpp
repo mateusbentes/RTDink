@@ -272,9 +272,16 @@ void OnFullscreenToggleRequestMultiplatform() {
 
 #endif // RTLINUX || PLATFORM_LINUX
 
+#ifdef PLATFORM_OSX
+void OnFullscreenToggleRequestMultiplatform()
+{
+    BaseApp::OnFullscreenToggleRequest();
+}
+#endif
+
 void App::OnFullscreenToggleRequest()
 {
-#if defined(RTLINUX) || defined(PLATFORM_LINUX)
+#if defined(RTLINUX) || defined(PLATFORM_LINUX) || defined(PLATFORM_OSX)
     OnFullscreenToggleRequestMultiplatform();
 #else
     BaseApp::OnFullscreenToggleRequest();
@@ -831,11 +838,7 @@ if (fullscreen)
 {
 LogMsg("Setting fullscreen...");
 g_bIsFullScreen = false; //because we're using toggle..
-#if defined(RTLINUX) || defined(PLATFORM_LINUX)
 OnFullscreenToggleRequestMultiplatform();
-#else
-BaseApp::OnFullscreenToggleRequest();
-#endif
 }
 
 #endif
