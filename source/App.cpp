@@ -205,7 +205,7 @@ const char * GetAppName()
 	return "Dink Smallwood HD";
 };
 
-#if defined(RTLINUX) || defined(PLATFORM_LINUX)
+#if defined(RTLINUX) || defined(PLATFORM_LINUX) || defined(PLATFORM_OSX)
 
 #include <SDL2/SDL.h>
 
@@ -270,14 +270,7 @@ void OnFullscreenToggleRequestMultiplatform() {
     UpdateViewport(width, height);
 }
 
-#endif // RTLINUX || PLATFORM_LINUX
-
-#ifdef PLATFORM_OSX
-void OnFullscreenToggleRequestMultiplatform()
-{
-    BaseApp::OnFullscreenToggleRequest();
-}
-#endif
+#endif // RTLINUX || PLATFORM_LINUX || PLATFORM_OSX
 
 void App::OnFullscreenToggleRequest()
 {
