@@ -664,10 +664,7 @@ bool App::Init()
 	#endif
 
 #if defined(RTLINUX) || defined(PLATFORM_LINUX) || defined(PLATFORM_OSX)
-#ifdef PLATFORM_OSX
-	SDL_InitSubSystem(SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER);
-#endif
-	GetGamepadManager()->AddProvider(new GamepadProviderSDL2());
+GetGamepadManager()->AddProvider(new GamepadProviderSDL2());
 #endif
 
     if (GetVar("check_icade")->GetUINT32() != 0)
@@ -938,21 +935,7 @@ void App::Update()
 	BaseApp::Update();
 	m_adManager.Update();
 
-#ifdef PLATFORM_OSX
-	// macOS uses Cocoa event loop, not SDL2Main, so poll SDL joystick events
-	// and fire the signal that GamepadProviderSDL2 listens to.
-	{
-		SDL_Event ev;
-		while (SDL_PollEvent(&ev))
-		{
-			VariantList v;
-			v.Get(0).Set((Entity*)&ev); //hack: cast to Entity* to pass pointer, receiver casts back to SDL_Event*
-			g_sig_SDLEvent(&v);
-		}
-	}
-#endif
-
-	g_gamepadManager.Update();
+g_gamepadManager.Update();
 
 	if (!m_bDidPostInit)
 	{
