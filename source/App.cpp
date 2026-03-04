@@ -946,7 +946,7 @@ void App::Update()
 		while (SDL_PollEvent(&ev))
 		{
 			VariantList v;
-			v.Get(0).Set((void*)&ev);
+			v.Get(0).Set((Entity*)&ev); //hack: cast to Entity* to pass pointer, receiver casts back to SDL_Event*
 			g_sig_SDLEvent(&v);
 		}
 	}
