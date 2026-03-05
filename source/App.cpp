@@ -664,10 +664,6 @@ bool App::Init()
 	#endif
 
 #if defined(RTLINUX) || defined(PLATFORM_LINUX) || defined(PLATFORM_OSX)
-#ifdef PLATFORM_OSX
-if (SDL_InitSubSystem(SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER) != 0)
-    LogMsg("SDL joystick init failed: %s", SDL_GetError());
-#endif
 GetGamepadManager()->AddProvider(new GamepadProviderSDL2());
 #endif
     if (GetVar("check_icade")->GetUINT32() != 0)
