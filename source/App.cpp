@@ -97,8 +97,9 @@ GamepadManager * GetGamepadManager() {return &g_gamepadManager;}
 #include <SDL2/SDL.h>
   AudioManagerSDL g_audioManager;
 
-// Define the SDL event signal used by GamepadProviderSDL2 on macOS
-boost::signals2::signal<void(VariantList*)> g_sig_SDLEvent;
+  // g_sig_SDLEvent is defined in SDL2Main.cpp for SDL-main builds (Linux/Win).
+  // For the OSX Cocoa build which doesn't use SDL2Main.cpp, define it here.
+  boost::signals2::signal<void(VariantList*)> g_sig_SDLEvent;
 
   //in theory, CocosDenshion should work for the Mac builds, but right now it seems to want a big chunk of
   //Cocos2d included so I'm not fiddling with it for now
