@@ -154,6 +154,12 @@ open RTDink/OSX/RTDink.xcodeproj
 
 4. Select the **Release** configuration and build (`⌘B`).
 
+> **If you get "duplicate symbols" linker errors**, delete the stale build cache:
+> ```bash
+> rm -rf ~/Library/Developer/Xcode/DerivedData/RTDink-*
+> ```
+> Then rebuild.
+
 > **Audio:** The macOS build uses SDL2_mixer for audio (same as Linux) — no FMOD required.
 
 ---
