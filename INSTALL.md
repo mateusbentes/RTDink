@@ -97,21 +97,22 @@ proton/
 The macOS build uses the Xcode project at `OSX/RTDink.xcodeproj`.
 
 - **Supported architecture:** Apple Silicon (ARM64 / M1+). Intel (x86_64) is not currently supported.
-- **Audio:** Uses **SDL2_mixer** (same as Linux) — no proprietary dependencies required.
+- **Audio:** Uses **SDL2** + **SDL2_mixer** — no FMOD required.
 
 ### Directory layout
 
-Clone both repos as **siblings** (not RTDink inside proton):
+Clone both repos as **siblings**:
 
 ```
 some_folder/
   proton/              <-- Proton SDK (cloned here)
     shared/
-    RTSimpleApp/
   RTDink/              <-- this repo (cloned here)
     OSX/
       RTDink.xcodeproj
 ```
+
+The Xcode project references `../../shared/` (relative to `OSX/`) to find the Proton SDK.
 
 ### Steps
 
@@ -122,45 +123,28 @@ git clone https://github.com/SethRobinson/proton.git
 git clone https://github.com/SethRobinson/RTDink.git
 ```
 
-2. Install **SDL2** and **SDL2_mixer**:
+2. Install **SDL2** and **SDL2_mixer** via Homebrew:
 
-   **Option A — Homebrew** (if you have admin access):
-   ```bash
-   brew install sdl2 sdl2_mixer
-   ```
+```bash
+brew install sdl2 sdl2_mixer
+```
 
-   **Option B — No admin access** (e.g. MacInCloud or shared machines):
-   ```bash
-   # SDL2 framework
-   curl -L -o ~/SDL2.dmg "https://github.com/libsdl-org/SDL/releases/download/release-2.30.9/SDL2-2.30.9.dmg"
-   hdiutil attach ~/SDL2.dmg
-   mkdir -p ~/Library/Frameworks
-   cp -r /Volumes/SDL2/SDL2.framework ~/Library/Frameworks/
-   hdiutil detach /Volumes/SDL2
+3. Generate the required libpng config header:
 
-   # SDL2_mixer framework
-   curl -L -o ~/SDL2_mixer.dmg "https://github.com/libsdl-org/SDL_mixer/releases/download/release-2.8.0/SDL2_mixer-2.8.0.dmg"
-   hdiutil attach ~/SDL2_mixer.dmg
-   cp -r "/Volumes/SDL2_mixer/SDL2_mixer.framework" ~/Library/Frameworks/
-   hdiutil detach /Volumes/SDL2_mixer
-   ```
-   The Xcode project looks for both frameworks in `~/Library/Frameworks/` automatically — no admin or Homebrew required.
+```bash
+LIBPNG=proton/shared/Irrlicht/source/Irrlicht/libpng
+cp "$LIBPNG/pnglibconf.h.prebuilt" "$LIBPNG/pnglibconf.h"
+```
 
-3. Open the Xcode project:
+4. Open the Xcode project:
 
 ```bash
 open RTDink/OSX/RTDink.xcodeproj
 ```
 
-4. Select the **Release** configuration and build (`⌘B`).
+5. Select the **Release** configuration and build (`⌘B`).
 
-> **If you get "duplicate symbols" linker errors**, delete the stale build cache:
-> ```bash
-> rm -rf ~/Library/Developer/Xcode/DerivedData/RTDink-*
-> ```
-> Then rebuild.
-
-> **Audio:** The macOS build uses SDL2_mixer for audio (same as Linux) — no FMOD required.
+> **Note:** The Xcode project's build settings already include Homebrew's SDL2 library paths (`/opt/homebrew/lib`, `/usr/local/lib`). No manual path configuration is needed.
 
 ---
 
