@@ -827,11 +827,12 @@ GetGamepadManager()->AddProvider(new GamepadProviderSDL2());
 		g_script_debug_mode = true;
 	}
 
-if (fullscreen)
-{LogMsg("Setting fullscreen...");
-	g_bIsFullScreen = false; //because we're using toggle..
-	OnFullscreenToggleRequestMultiplatform();
-}
+	if (fullscreen)
+	{
+		LogMsg("Setting fullscreen...");
+		g_bIsFullScreen = false; //because we're using toggle..
+		OnFullscreenToggleRequestMultiplatform();
+	}
 
 #endif
 
@@ -949,7 +950,7 @@ void App::Update()
 }
 #endif
 
-g_gamepadManager.Update();
+	g_gamepadManager.Update();
 
 	if (!m_bDidPostInit)
 	{
