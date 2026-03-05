@@ -123,11 +123,29 @@ git clone https://github.com/SethRobinson/proton.git
 git clone https://github.com/SethRobinson/RTDink.git
 ```
 
-2. Install **SDL2** and **SDL2_mixer** via Homebrew:
+2. Install **SDL2** and **SDL2_mixer**:
 
-```bash
-brew install sdl2 sdl2_mixer
-```
+   **Option A — Homebrew** (recommended):
+   ```bash
+   brew install sdl2 sdl2_mixer
+   ```
+
+   **Option B — No admin access** (e.g. MacInCloud or shared machines):
+   ```bash
+   # SDL2 framework
+   curl -L -o ~/SDL2.dmg "https://github.com/libsdl-org/SDL/releases/download/release-2.30.9/SDL2-2.30.9.dmg"
+   hdiutil attach ~/SDL2.dmg
+   mkdir -p ~/Library/Frameworks
+   cp -r /Volumes/SDL2/SDL2.framework ~/Library/Frameworks/
+   hdiutil detach /Volumes/SDL2
+
+   # SDL2_mixer framework
+   curl -L -o ~/SDL2_mixer.dmg "https://github.com/libsdl-org/SDL_mixer/releases/download/release-2.8.0/SDL2_mixer-2.8.0.dmg"
+   hdiutil attach ~/SDL2_mixer.dmg
+   cp -r "/Volumes/SDL2_mixer/SDL2_mixer.framework" ~/Library/Frameworks/
+   hdiutil detach /Volumes/SDL2_mixer
+   ```
+   The Xcode project looks for both frameworks in `~/Library/Frameworks/` automatically — no admin or Homebrew required.
 
 3. Generate the required libpng config header:
 
