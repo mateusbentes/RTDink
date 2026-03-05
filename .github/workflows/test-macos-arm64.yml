@@ -59,6 +59,7 @@ jobs:
           cd OSX
           SDL2_PREFIX=$(brew --prefix sdl2)
           SDL2_MIXER_PREFIX=$(brew --prefix sdl2_mixer)
+          set -o pipefail
           xcodebuild -project RTDink.xcodeproj \
             -configuration Release \
             -arch arm64 -arch x86_64 \
@@ -69,7 +70,13 @@ jobs:
             OTHER_LDFLAGS="-lSDL2 -lSDL2_mixer" \
             OTHER_CFLAGS="-I$SDL2_PREFIX/include/SDL2 -I$SDL2_MIXER_PREFIX/include/SDL2 -DGL_SILENCE_DEPRECATION" \
             LIBRARY_SEARCH_PATHS="$SDL2_PREFIX/lib $SDL2_MIXER_PREFIX/lib /opt/homebrew/lib /usr/local/lib" \
-            build
+            build 2>&1 | tee /tmp/xcodebuild.log; \
+          EXIT=${PIPESTATUS[0]}; \
+          if [ $EXIT -ne 0 ]; then \
+            echo "=== BUILD ERRORS ==="; \
+            grep -E "error:|undefined symbol|duplicate symbol|ld:" /tmp/xcodebuild.log | head -80; \
+            exit $EXIT; \
+          fi
 
       - name: Check Binary Architecture
         run: |
