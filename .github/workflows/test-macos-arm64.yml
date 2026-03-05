@@ -9,10 +9,15 @@ on:
     branches:
       - 'test_mac_arm64'
 
+concurrency:
+  group: macos-build-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   build-macos-universal:
     name: Build Universal Binary (arm64 + x86_64)
     runs-on: macos-13  # Intel runner — tests x86_64 and cross-compiles arm64
+    timeout-minutes: 60
 
     steps:
       - name: Checkout code
