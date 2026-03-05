@@ -43,11 +43,25 @@ jobs:
           echo "macOS Version: $(sw_vers -productVersion)"
           xcodebuild -version
 
-      - name: Install SDL2
+      - name: Install SDL2 universal frameworks
         run: |
-          brew install sdl2 sdl2_mixer
-          echo "SDL2 prefix: $(brew --prefix sdl2)"
-          echo "SDL2_mixer prefix: $(brew --prefix sdl2_mixer)"
+          mkdir -p ~/Library/Frameworks
+
+          # SDL2 universal framework (arm64 + x86_64)
+          curl -L -o /tmp/SDL2.dmg "https://github.com/libsdl-org/SDL/releases/download/release-2.30.9/SDL2-2.30.9.dmg"
+          hdiutil attach /tmp/SDL2.dmg -mountpoint /Volumes/SDL2
+          cp -r /Volumes/SDL2/SDL2.framework ~/Library/Frameworks/
+          hdiutil detach /Volumes/SDL2
+
+          # SDL2_mixer universal framework (arm64 + x86_64)
+          curl -L -o /tmp/SDL2_mixer.dmg "https://github.com/libsdl-org/SDL_mixer/releases/download/release-2.8.0/SDL2_mixer-2.8.0.dmg"
+          hdiutil attach /tmp/SDL2_mixer.dmg -mountpoint /Volumes/SDL2_mixer
+          cp -r /Volumes/SDL2_mixer/SDL2_mixer.framework ~/Library/Frameworks/
+          hdiutil detach /Volumes/SDL2_mixer
+
+          echo "Verifying frameworks are universal:"
+          lipo -info ~/Library/Frameworks/SDL2.framework/SDL2
+          lipo -info ~/Library/Frameworks/SDL2_mixer.framework/SDL2_mixer
 
       - name: Generate pnglibconf.h
         run: |
@@ -57,8 +71,8 @@ jobs:
       - name: Build Universal Binary
         run: |
           cd OSX
-          SDL2_PREFIX=$(brew --prefix sdl2)
-          SDL2_MIXER_PREFIX=$(brew --prefix sdl2_mixer)
+          SDL2_FRAMEWORK="$HOME/Library/Frameworks/SDL2.framework"
+          SDL2_MIXER_FRAMEWORK="$HOME/Library/Frameworks/SDL2_mixer.framework"
           set -o pipefail
           xcodebuild -project RTDink.xcodeproj \
             -configuration Release \
@@ -66,10 +80,9 @@ jobs:
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO \
-            FRAMEWORK_SEARCH_PATHS="" \
-            OTHER_LDFLAGS="-lSDL2 -lSDL2_mixer" \
-            OTHER_CFLAGS="-I$SDL2_PREFIX/include/SDL2 -I$SDL2_MIXER_PREFIX/include/SDL2 -DGL_SILENCE_DEPRECATION" \
-            LIBRARY_SEARCH_PATHS="$SDL2_PREFIX/lib $SDL2_MIXER_PREFIX/lib /opt/homebrew/lib /usr/local/lib" \
+            FRAMEWORK_SEARCH_PATHS="$HOME/Library/Frameworks" \
+            OTHER_LDFLAGS="-framework SDL2 -framework SDL2_mixer -rpath $HOME/Library/Frameworks" \
+            OTHER_CFLAGS="-F$HOME/Library/Frameworks -DGL_SILENCE_DEPRECATION" \
             build 2>&1 | tee /tmp/xcodebuild.log; \
           EXIT=${PIPESTATUS[0]}; \
           if [ $EXIT -ne 0 ]; then \
