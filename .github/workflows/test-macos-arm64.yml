@@ -1,54 +1,43 @@
-name: Test macOS ARM64 Build
+name: Test macOS Universal Build
 
 # This workflow only runs in YOUR fork
 # It won't affect Seth's repository
-# You can trigger it manually from GitHub Actions tab
 
 on:
-  # Manual trigger - you control when it runs
   workflow_dispatch:
-  
-  # Automatically run on pushes to this test branch
   push:
     branches:
       - 'test_mac_arm64'
 
 jobs:
-  build-macos-arm64:
-    name: Build on Apple Silicon
-    runs-on: macos-14  # This is Apple Silicon (M1)
-    
+  build-macos-universal:
+    name: Build Universal Binary (arm64 + x86_64)
+    runs-on: macos-13  # Intel runner — tests x86_64 and cross-compiles arm64
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - name: Clone Proton SDK
         run: |
           cd ..
           git clone https://github.com/SethRobinson/proton.git
           ln -s proton/shared shared
-          ls -la | grep shared
           echo "Verifying shared directory is accessible from RTDink/OSX:"
           cd RTDink/OSX
           ls -la ../../shared/ | head -5
-      
+
       - name: Create missing game directory
         run: |
           mkdir -p bin/game
           echo "Placeholder for game assets" > bin/game/README.txt
-      
+
       - name: System Info
         run: |
           echo "Architecture: $(uname -m)"
           echo "macOS Version: $(sw_vers -productVersion)"
           xcodebuild -version
-      
-      - name: Check Xcode Project
-        run: |
-          cd OSX
-          echo "Checking build settings..."
-          xcodebuild -project RTDink.xcodeproj -showBuildSettings | grep -E "ARCHS|VALID_ARCHS|MACOSX_DEPLOYMENT_TARGET"
-      
+
       - name: Install SDL2
         run: |
           brew install sdl2 sdl2_mixer
@@ -60,14 +49,14 @@ jobs:
           LIBPNG=../shared/Irrlicht/source/Irrlicht/libpng
           cp "$LIBPNG/pnglibconf.h.prebuilt" "$LIBPNG/pnglibconf.h"
 
-      - name: Build for ARM64
+      - name: Build Universal Binary
         run: |
           cd OSX
           SDL2_PREFIX=$(brew --prefix sdl2)
           SDL2_MIXER_PREFIX=$(brew --prefix sdl2_mixer)
           xcodebuild -project RTDink.xcodeproj \
             -configuration Release \
-            -arch arm64 \
+            -arch arm64 -arch x86_64 \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO \
@@ -76,7 +65,7 @@ jobs:
             OTHER_CFLAGS="-I$SDL2_PREFIX/include/SDL2 -I$SDL2_MIXER_PREFIX/include/SDL2 -DGL_SILENCE_DEPRECATION" \
             LIBRARY_SEARCH_PATHS="$SDL2_PREFIX/lib $SDL2_MIXER_PREFIX/lib /opt/homebrew/lib /usr/local/lib" \
             build
-      
+
       - name: Check Binary Architecture
         run: |
           cd OSX
@@ -86,16 +75,14 @@ jobs:
             if [ -f "$BINARY" ]; then
               echo "Binary found: $BINARY"
               file "$BINARY"
-              lipo -info "$BINARY" || true
+              lipo -info "$BINARY"
             fi
           fi
-      
+
       - name: Upload Build Artifact
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: RTDink-macOS-ARM64
+          name: RTDink-macOS-Universal
           path: OSX/build/Release/*.app
           retention-days: 7
-
-
