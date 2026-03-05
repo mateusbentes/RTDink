@@ -1058,7 +1058,7 @@ void App::OnScreenSizeChange()
 	BaseApp::OnScreenSizeChange();
 	if (GetPrimaryGLX() != 0)
 	{
-#if defined(RTLINUX) || defined(PLATFORM_LINUX)
+#if defined(RTLINUX) || defined(PLATFORM_LINUX) || defined(PLATFORM_OSX)
 		UpdateViewport(GetPrimaryGLX(), GetPrimaryGLY());
 #endif
 		SetupOrtho();
@@ -1559,3 +1559,4 @@ bool TouchesHaveBeenReceived()
 #endif
 	return false;
 }
+
