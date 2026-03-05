@@ -16,7 +16,7 @@ concurrency:
 jobs:
   build-macos-universal:
     name: Build Universal Binary (arm64 + x86_64)
-    runs-on: macos-13  # Intel runner — tests x86_64 and cross-compiles arm64
+    runs-on: macos-14  # Apple Silicon runner — cross-compiles both arm64 and x86_64
     timeout-minutes: 60
 
     steps:
