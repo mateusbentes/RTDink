@@ -897,6 +897,39 @@ bool App::Init()
 		OnFullscreenToggleRequestMultiplatform();
 	}
 
+#elif defined(PLATFORM_OSX)
+{
+	// macOS video settings — read saved resolution and fullscreen preference
+	int videox = GetApp()->GetVarWithDefault("video_x", uint32(1024))->GetUINT32();
+	int videoy = GetApp()->GetVarWithDefault("video_y", uint32(768))->GetUINT32();
+	int fullscreen = GetApp()->GetVarWithDefault("fullscreen", uint32(0))->GetUINT32();
+
+	if (DoesCommandLineParmExist("-window") || DoesCommandLineParmExist("-windowed"))
+	{
+		fullscreen = false;
+		GetApp()->GetVar("fullscreen")->Set(uint32(0));
+	}
+	if (DoesCommandLineParmExist("-skip"))
+	{
+		SetSkipMode(true);
+	}
+	if (DoesCommandLineParmExist("-debug"))
+	{
+		GetApp()->SetCheatsEnabled(true);
+		g_script_debug_mode = true;
+	}
+
+	// Apply saved window size (sends MESSAGE_SET_VIDEO_MODE to MyOpenGLView)
+	SetVideoMode(videox, videoy, false, 0);
+
+	if (fullscreen)
+	{
+		LogMsg("Setting fullscreen...");
+		g_bIsFullScreen = false; //because we're using toggle..
+		OnFullscreenToggleRequestMultiplatform();
+	}
+}
+
 #endif
 
 	return true;
