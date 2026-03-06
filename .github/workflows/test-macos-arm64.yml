@@ -99,9 +99,34 @@ jobs:
           mkdir -p "$APP/Contents/Frameworks"
           cp -r ~/Library/Frameworks/SDL2.framework "$APP/Contents/Frameworks/"
           cp -r ~/Library/Frameworks/SDL2_mixer.framework "$APP/Contents/Frameworks/"
-          # Fix rpath to point inside the bundle
+
           BINARY="$APP/Contents/MacOS/$(basename "$APP" .app)"
-          install_name_tool -rpath "$HOME/Library/Frameworks" "@executable_path/../Frameworks" "$BINARY" || true
+          echo "=== Current load commands ==="
+          otool -L "$BINARY"
+
+          # Rewrite all SDL library references to use bundle-relative path
+          # This works regardless of what rpath was set at build time
+          for ARCH in x86_64 arm64; do
+            SDL2_PATH=$(otool -arch $ARCH -L "$BINARY" 2>/dev/null | grep SDL2.framework/Versions | grep -v SDL2_mixer | awk '{print $1}' | head -1)
+            SDL2_MIXER_PATH=$(otool -arch $ARCH -L "$BINARY" 2>/dev/null | grep SDL2_mixer.framework/Versions | awk '{print $1}' | head -1)
+            echo "[$ARCH] SDL2: $SDL2_PATH"
+            echo "[$ARCH] SDL2_mixer: $SDL2_MIXER_PATH"
+          done
+
+          SDL2_PATH=$(otool -L "$BINARY" | grep SDL2.framework/Versions | grep -v SDL2_mixer | awk '{print $1}' | head -1)
+          SDL2_MIXER_PATH=$(otool -L "$BINARY" | grep SDL2_mixer.framework/Versions | awk '{print $1}' | head -1)
+
+          if [ -n "$SDL2_PATH" ]; then
+            install_name_tool -change "$SDL2_PATH" "@executable_path/../Frameworks/SDL2.framework/Versions/A/SDL2" "$BINARY"
+            echo "Fixed SDL2: $SDL2_PATH -> @executable_path/../Frameworks/SDL2.framework/Versions/A/SDL2"
+          fi
+          if [ -n "$SDL2_MIXER_PATH" ]; then
+            install_name_tool -change "$SDL2_MIXER_PATH" "@executable_path/../Frameworks/SDL2_mixer.framework/Versions/A/SDL2_mixer" "$BINARY"
+            echo "Fixed SDL2_mixer: $SDL2_MIXER_PATH -> @executable_path/../Frameworks/SDL2_mixer.framework/Versions/A/SDL2_mixer"
+          fi
+
+          echo "=== Fixed load commands ==="
+          otool -L "$BINARY"
           echo "Frameworks embedded."
 
       - name: Verify game data is bundled
