@@ -46,6 +46,7 @@ void AddText(const char *tex, const char *filename);
 #endif
 
 #ifdef PLATFORM_OSX
+#include "OSX/OSXUtils.h"
 bool g_bIsFullScreen = false;
 #else
 extern bool g_bIsFullScreen;
