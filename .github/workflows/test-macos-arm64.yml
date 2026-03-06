@@ -104,6 +104,29 @@ jobs:
           install_name_tool -rpath "$HOME/Library/Frameworks" "@executable_path/../Frameworks" "$BINARY" || true
           echo "Frameworks embedded."
 
+      - name: Verify game data is bundled
+        run: |
+          cd OSX
+          APP=$(find build -name "*.app" -type d | head -1)
+          echo "Checking bundle contents:"
+          ls "$APP/Contents/Resources/" | head -20
+          if [ -d "$APP/Contents/Resources/dink" ]; then
+            echo "✅ dink/ game data is bundled"
+          else
+            echo "❌ dink/ game data is MISSING from bundle"
+            exit 1
+          fi
+          if [ -d "$APP/Contents/Resources/interface" ]; then
+            echo "✅ interface/ is bundled"
+          else
+            echo "❌ interface/ is MISSING"
+          fi
+          if [ -d "$APP/Contents/Resources/audio" ]; then
+            echo "✅ audio/ is bundled"
+          else
+            echo "❌ audio/ is MISSING"
+          fi
+
       - name: Check Binary Architecture
         run: |
           cd OSX
