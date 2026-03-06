@@ -46,6 +46,7 @@ void AddText(const char *tex, const char *filename);
 #endif
 
 #ifdef PLATFORM_OSX
+#import <Cocoa/Cocoa.h>
 bool g_bIsFullScreen = false;
 #else
 extern bool g_bIsFullScreen;
@@ -242,7 +243,7 @@ const char * GetAppName()
 	return "Dink Smallwood HD";
 };
 
-#if defined(RTLINUX) || defined(PLATFORM_LINUX) || defined(PLATFORM_OSX)
+#if defined(RTLINUX) || defined(PLATFORM_LINUX)
 
 #include <SDL2/SDL.h>
 
@@ -307,12 +308,20 @@ void OnFullscreenToggleRequestMultiplatform() {
     UpdateViewport(width, height);
 }
 
-#endif // RTLINUX || PLATFORM_LINUX || PLATFORM_OSX
+#endif // RTLINUX || PLATFORM_LINUX
 
 void App::OnFullscreenToggleRequest()
 {
-#if defined(RTLINUX) || defined(PLATFORM_LINUX) || defined(PLATFORM_OSX)
+#if defined(RTLINUX) || defined(PLATFORM_LINUX)
     OnFullscreenToggleRequestMultiplatform();
+#elif defined(PLATFORM_OSX)
+    // macOS Cocoa: use native fullscreen toggle (no SDL window involved)
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSWindow *window = [NSApp mainWindow];
+        [window toggleFullScreen:nil];
+        g_bIsFullScreen = !g_bIsFullScreen;
+        GetApp()->GetVar("fullscreen")->Set(uint32(g_bIsFullScreen));
+    });
 #else
     BaseApp::OnFullscreenToggleRequest();
 #endif
@@ -701,7 +710,14 @@ bool App::Init()
 	#endif
 
 #if defined(RTLINUX) || defined(PLATFORM_LINUX) || defined(PLATFORM_OSX)
-GetGamepadManager()->AddProvider(new GamepadProviderSDL2());
+{
+    // On macOS Cocoa builds SDL video is not used, so we must call SDL_Init(0)
+    // before any SDL_InitSubSystem to satisfy SDL's internal state requirements.
+    #ifdef PLATFORM_OSX
+    SDL_Init(0);
+    #endif
+    GetGamepadManager()->AddProvider(new GamepadProviderSDL2());
+}
 #endif
     if (GetVar("check_icade")->GetUINT32() != 0)
 	{
@@ -830,8 +846,8 @@ GetGamepadManager()->AddProvider(new GamepadProviderSDL2());
 		*/
 	}
 
-#elif defined(RTLINUX) || defined(PLATFORM_LINUX) || defined(PLATFORM_OSX)
-	// Linux/macOS video settings
+#elif defined(RTLINUX) || defined(PLATFORM_LINUX)
+	// Linux video settings
 	int fullscreen = GetApp()->GetVarWithDefault("fullscreen", uint32(0))->GetUINT32();
 
 	if (DoesCommandLineParmExist("--help"))
@@ -975,10 +991,26 @@ void App::Update()
 	BaseApp::Update();
 	m_adManager.Update();
 
-#ifdef PLATFORM_OSX
+#if defined(RTLINUX) || defined(PLATFORM_LINUX)
 {
+    // Linux: SDL owns the window, pump all events
     SDL_Event ev;
     while (SDL_PollEvent(&ev))
+    {
+        VariantList v;
+        v.Get(0).Set((Entity*)&ev);
+        g_sig_SDLEvent(&v);
+    }
+}
+#elif defined(PLATFORM_OSX)
+{
+    // macOS Cocoa: SDL does not own the window, but we still need to pump
+    // SDL joystick/gamepad events. SDL_PumpEvents() processes the SDL event
+    // queue without touching the Cocoa window or event loop.
+    SDL_PumpEvents();
+    SDL_Event ev;
+    while (SDL_PeepEvents(&ev, 1, SDL_GETEVENT,
+                          SDL_JOYAXISMOTION, SDL_CONTROLLERDEVICEREMAPPED) == 1)
     {
         VariantList v;
         v.Get(0).Set((Entity*)&ev);
@@ -1098,7 +1130,7 @@ void App::OnScreenSizeChange()
 	BaseApp::OnScreenSizeChange();
 	if (GetPrimaryGLX() != 0)
 	{
-#if defined(RTLINUX) || defined(PLATFORM_LINUX) || defined(PLATFORM_OSX)
+#if defined(RTLINUX) || defined(PLATFORM_LINUX)
 		UpdateViewport(GetPrimaryGLX(), GetPrimaryGLY());
 #endif
 		SetupOrtho();
