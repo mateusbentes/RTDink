@@ -101,6 +101,42 @@ GamepadManager * GetGamepadManager() {return &g_gamepadManager;}
   // For the OSX Cocoa build which doesn't use SDL2Main.cpp, define it here.
   boost::signals2::signal<void(VariantList*)> g_sig_SDLEvent;
 
+// Returns the path containing dink/ game data.
+// Checks inside the bundle first, then falls back to the folder next to the .app
+// so users can place GOG/Steam data alongside the app without modifying the bundle.
+#include <sys/stat.h>
+#include <CoreFoundation/CoreFoundation.h>
+static string GetGameDataPath()
+{
+	string bundlePath = GetBaseAppPath();
+
+	struct stat st;
+	if (stat((bundlePath + "dink").c_str(), &st) == 0 && S_ISDIR(st.st_mode))
+	{
+		LogMsg("Game data found in bundle: %s", bundlePath.c_str());
+		return bundlePath;
+	}
+
+	// Fall back to the directory containing the .app
+	CFBundleRef mainBundle = CFBundleGetMainBundle();
+	CFURLRef bundleURL = CFBundleCopyBundleURL(mainBundle);
+	CFURLRef parentURL = CFURLCreateCopyDeletingLastPathComponent(NULL, bundleURL);
+	char parentPath[PATH_MAX];
+	CFURLGetFileSystemRepresentation(parentURL, TRUE, (UInt8 *)parentPath, PATH_MAX);
+	CFRelease(bundleURL);
+	CFRelease(parentURL);
+
+	string externalPath = string(parentPath) + "/";
+	if (stat((externalPath + "dink").c_str(), &st) == 0 && S_ISDIR(st.st_mode))
+	{
+		LogMsg("Game data found next to .app: %s", externalPath.c_str());
+		return externalPath;
+	}
+
+	LogMsg("Warning: dink/ not found in bundle or next to .app, defaulting to bundle path");
+	return bundlePath;
+}
+
   //in theory, CocosDenshion should work for the Mac builds, but right now it seems to want a big chunk of
   //Cocos2d included so I'm not fiddling with it for now
 
@@ -729,7 +765,11 @@ GetGamepadManager()->AddProvider(new GamepadProviderSDL2());
 	GetAudioManager()->SetMidiMusicModVol(0.3f);
 
 	GetAudioManager()->Preload("audio/click.wav");
+#ifdef PLATFORM_OSX
+	InitDinkPaths(GetGameDataPath(), "dink", "");
+#else
 	InitDinkPaths(GetBaseAppPath(), "dink", "");
+#endif
 	
 	GetBaseApp()->m_sig_pre_enterbackground.connect(1, boost::bind(&App::OnPreEnterBackground, this, _1));
 	GetBaseApp()->m_sig_loadSurfaces.connect(1, boost::bind(&App::OnLoadSurfaces, this));
@@ -1336,7 +1376,11 @@ void ImportSaveState(string physicalFname)
 			SlideScreen(pNewMenu, false);
 			GetMessageManager()->CallEntityFunction(pNewMenu, 500, "OnDelete", NULL);
 
+#ifdef PLATFORM_OSX
+			InitDinkPaths(GetGameDataPath(), "dink", RemoveTrailingBackslash(newDMODDir));
+#else
 			InitDinkPaths(GetBaseAppPath(), "dink", RemoveTrailingBackslash(newDMODDir));
+#endif
 			GameCreate(pNewMenu->GetParent(), 0, physicalFname);
 			GetBaseApp()->SetGameTickPause(false);
 		}
