@@ -308,6 +308,7 @@ void OnFullscreenToggleRequestMultiplatform() {
     UpdateViewport(width, height);
 }
 #endif // RTLINUX || PLATFORM_LINUX
+#endif // RTLINUX || PLATFORM_LINUX || PLATFORM_OSX
 
 #if defined(PLATFORM_OSX)
 
