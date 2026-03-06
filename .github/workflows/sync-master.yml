@@ -27,7 +27,10 @@ jobs:
         run: |
           git checkout master
           # Checkout every file from test_mac_arm64 except .github/
-          git checkout test_mac_arm64 -- $(git ls-tree -r --name-only test_mac_arm64 | grep -v '^\.github')
+          # Use -z to handle filenames with spaces safely
+          git ls-tree -r --name-only -z test_mac_arm64 \
+            | grep -z -v '^\.github' \
+            | xargs -0 git checkout test_mac_arm64 --
           # If nothing changed, exit cleanly
           if git diff --cached --quiet; then
             echo "master already up to date"
