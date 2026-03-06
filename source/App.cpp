@@ -725,10 +725,12 @@ bool App::Init()
 
 #if defined(RTLINUX) || defined(PLATFORM_LINUX) || defined(PLATFORM_OSX)
 {
-    // On macOS Cocoa builds SDL video is not used, so we must call SDL_Init(0)
-    // before any SDL_InitSubSystem to satisfy SDL's internal state requirements.
+    // On macOS Cocoa builds SDL video is not used, so we must call SDL_Init
+    // with SDL_INIT_EVENTS before SDL_InitSubSystem for joystick/gamepad.
+    // Without SDL_INIT_EVENTS the event queue is not set up and SDL_PeepEvents
+    // returns nothing, making gamepads invisible.
     #ifdef PLATFORM_OSX
-    SDL_Init(0);
+    SDL_Init(SDL_INIT_EVENTS);
     #endif
     GetGamepadManager()->AddProvider(new GamepadProviderSDL2());
 }
