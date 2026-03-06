@@ -81,7 +81,7 @@ jobs:
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO \
             FRAMEWORK_SEARCH_PATHS="$HOME/Library/Frameworks" \
-            OTHER_LDFLAGS="-framework SDL2 -framework SDL2_mixer -rpath $HOME/Library/Frameworks" \
+            OTHER_LDFLAGS="-framework SDL2 -framework SDL2_mixer -rpath @executable_path/../Frameworks" \
             OTHER_CFLAGS="-F$HOME/Library/Frameworks -DGL_SILENCE_DEPRECATION" \
             build 2>&1 | tee /tmp/xcodebuild.log; \
           EXIT=${PIPESTATUS[0]}; \
