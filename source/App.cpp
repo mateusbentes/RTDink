@@ -47,8 +47,6 @@ void AddText(const char *tex, const char *filename);
 
 #ifdef PLATFORM_OSX
 bool g_bIsFullScreen = false;
-// Forward declaration - implemented in OSXUtils.mm (Objective-C++ required)
-void OSXToggleFullscreen();
 #else
 extern bool g_bIsFullScreen;
 #endif
