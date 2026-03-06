@@ -124,7 +124,7 @@ git clone https://github.com/SethRobinson/proton.git
 git clone https://github.com/SethRobinson/RTDink.git
 ```
 
-   > **Note (contributors):** If building from the `mateusbentes/RTDink` fork, use `https://github.com/mateusbentes/proton.git` instead of the upstream Proton SDK — it contains macOS-specific fixes for window creation, resolution handling, and the app lifecycle that have not yet been merged upstream.
+
 
 2. Install **SDL2** and **SDL2_mixer** frameworks:
 
