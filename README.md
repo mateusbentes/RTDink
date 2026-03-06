@@ -131,7 +131,7 @@ The original **Dink Smallwood** (1997) was created by **Seth A. Robinson**, **Ju
 * **yeoldtoast** Editors and a bunch of other Dink stuff
 * **RobJ** -- DinkC command fixes and compatibility improvements
 * **SimonK** -- DMOD stress testing and limit increase requests
-* **Mateus Sales Bentes** -- Linux port work, macOS universal binary (Intel + Apple Silicon), window lifecycle, resolution and controls fixes
+* **Mateus Sales Bentes** -- Linux port work, macOS universal binary (Intel + Apple Silicon)
 
 Special thanks to the entire [dinknetwork.com](https://www.dinknetwork.com/) community for their Dink creations and support over the years!
 
