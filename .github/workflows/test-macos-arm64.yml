@@ -91,6 +91,19 @@ jobs:
             exit $EXIT; \
           fi
 
+      - name: Embed SDL2 frameworks into app bundle
+        run: |
+          cd OSX
+          APP=$(find build -name "*.app" -type d | head -1)
+          echo "App bundle: $APP"
+          mkdir -p "$APP/Contents/Frameworks"
+          cp -r ~/Library/Frameworks/SDL2.framework "$APP/Contents/Frameworks/"
+          cp -r ~/Library/Frameworks/SDL2_mixer.framework "$APP/Contents/Frameworks/"
+          # Fix rpath to point inside the bundle
+          BINARY="$APP/Contents/MacOS/$(basename "$APP" .app)"
+          install_name_tool -rpath "$HOME/Library/Frameworks" "@executable_path/../Frameworks" "$BINARY" || true
+          echo "Frameworks embedded."
+
       - name: Check Binary Architecture
         run: |
           cd OSX
