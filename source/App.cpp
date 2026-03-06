@@ -725,12 +725,13 @@ bool App::Init()
 
 #if defined(RTLINUX) || defined(PLATFORM_LINUX) || defined(PLATFORM_OSX)
 {
-    // On macOS Cocoa builds SDL video is not used, so we must call SDL_Init
-    // with SDL_INIT_EVENTS before SDL_InitSubSystem for joystick/gamepad.
-    // Without SDL_INIT_EVENTS the event queue is not set up and SDL_PeepEvents
-    // returns nothing, making gamepads invisible.
+    // On macOS Cocoa builds SDL video is not used.
+    // Initialize SDL with events + joystick + gamecontroller upfront so the
+    // IOKit HID manager is set up before GamepadProviderSDL2::Init() runs.
+    // SDL_InitSubSystem inside GamepadProviderSDL2 will be a no-op for already
+    // initialized subsystems, so this is safe.
     #ifdef PLATFORM_OSX
-    SDL_Init(SDL_INIT_EVENTS);
+    SDL_Init(SDL_INIT_EVENTS | SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER);
     #endif
     GetGamepadManager()->AddProvider(new GamepadProviderSDL2());
 }
@@ -1058,8 +1059,10 @@ void App::Update()
     // queue without touching the Cocoa window or event loop.
     SDL_PumpEvents();
     SDL_Event ev;
+    // Drain all joystick/gamepad events in one pass (SDL_JOYAXISMOTION=0x600
+    // through SDL_CONTROLLERDEVICEREMAPPED=0x657 covers all pad events)
     while (SDL_PeepEvents(&ev, 1, SDL_GETEVENT,
-                          SDL_JOYAXISMOTION, SDL_CONTROLLERDEVICEREMAPPED) == 1)
+                          SDL_JOYAXISMOTION, SDL_CONTROLLERDEVICEREMAPPED) > 0)
     {
         VariantList v;
         v.Get(0).Set((Entity*)&ev);
