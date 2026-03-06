@@ -47,8 +47,6 @@ void AddText(const char *tex, const char *filename);
 
 #ifdef PLATFORM_OSX
 bool g_bIsFullScreen = false;
-// Forward declaration - implemented in OSXUtils.mm (Objective-C++ required)
-void OSXToggleFullscreen();
 #else
 extern bool g_bIsFullScreen;
 #endif
@@ -266,12 +264,10 @@ void UpdateViewport(int width, int height) {
     glLoadIdentity();
 
     if (windowAspect > gameAspect) {
-        // Window wider than game: add horizontal margins (letterbox)
         float scaledHeight = width / gameAspect;
         float offsetY = (scaledHeight - height) / 2.0f;
         glOrtho(0, width, height + offsetY, -offsetY, -1.0, 1.0);
     } else {
-        // Window taller than game: add vertical margins (pillarbox)
         float scaledWidth = height * gameAspect;
         float offsetX = (scaledWidth - width) / 2.0f;
         glOrtho(-offsetX, width + offsetX, height, 0, -1.0, 1.0);
@@ -281,6 +277,7 @@ void UpdateViewport(int width, int height) {
     glLoadIdentity();
 }
 
+// Linux: SDL owns the window - use SDL fullscreen toggle
 void OnFullscreenToggleRequestMultiplatform() {
     SDL_Window* window = GetSDLWindow();
     if (!window) return;
@@ -309,18 +306,25 @@ void OnFullscreenToggleRequestMultiplatform() {
     UpdateViewport(width, height);
 }
 
-#endif // RTLINUX || PLATFORM_LINUX
+#elif defined(PLATFORM_OSX)
 
-#ifdef PLATFORM_OSX
-// Forward declaration - implemented in OSXUtils.mm (Objective-C++ required)
+// macOS: Cocoa owns the window - implemented in OSXUtils.mm (Objective-C++ required)
 void OSXToggleFullscreen();
 
-// Called from dink.cpp on all desktop platforms - macOS delegates to OSXToggleFullscreen
-void OnFullscreenToggleRequestMultiplatform()
-{
+// dink.cpp calls OnFullscreenToggleRequestMultiplatform() on all desktop platforms
+void OnFullscreenToggleRequestMultiplatform() {
     OSXToggleFullscreen();
 }
-#endif
+
+#else
+
+// Windows and other platforms: BaseApp handles fullscreen via OS messages.
+// dink.cpp calls this so we need a stub that routes correctly.
+void OnFullscreenToggleRequestMultiplatform() {
+    if (GetApp()) GetApp()->OnFullscreenToggleRequest();
+}
+
+#endif // platform fullscreen
 
 void App::OnFullscreenToggleRequest()
 {
