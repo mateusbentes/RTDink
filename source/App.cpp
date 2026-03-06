@@ -311,12 +311,22 @@ void OnFullscreenToggleRequestMultiplatform() {
 
 #endif // RTLINUX || PLATFORM_LINUX
 
+#ifdef PLATFORM_OSX
+// Forward declaration - implemented in OSXUtils.mm (Objective-C++ required)
+void OSXToggleFullscreen();
+
+// Called from dink.cpp on all desktop platforms - macOS delegates to OSXToggleFullscreen
+void OnFullscreenToggleRequestMultiplatform()
+{
+    OSXToggleFullscreen();
+}
+#endif
+
 void App::OnFullscreenToggleRequest()
 {
 #if defined(RTLINUX) || defined(PLATFORM_LINUX)
     OnFullscreenToggleRequestMultiplatform();
 #elif defined(PLATFORM_OSX)
-    // Implemented in OSXUtils.mm (Objective-C++ required for Cocoa calls)
     OSXToggleFullscreen();
 #else
     BaseApp::OnFullscreenToggleRequest();

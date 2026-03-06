@@ -26,7 +26,7 @@ jobs:
       - name: Clone Proton SDK
         run: |
           cd ..
-          git clone https://github.com/SethRobinson/proton.git
+          git clone https://github.com/mateusbentes/proton.git
           ln -s proton/shared shared
           echo "Verifying shared directory is accessible from RTDink/OSX:"
           cd RTDink/OSX
