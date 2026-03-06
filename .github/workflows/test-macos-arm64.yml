@@ -152,16 +152,27 @@ jobs:
             echo "❌ audio/ is MISSING"
           fi
 
-      - name: Check Binary Architecture
+      - name: Check Binary Architecture and Library Paths
         run: |
           cd OSX
           APP=$(find build -name "*.app" -type d | head -1)
           if [ -n "$APP" ]; then
             BINARY="$APP/Contents/MacOS/$(basename "$APP" .app)"
             if [ -f "$BINARY" ]; then
-              echo "Binary found: $BINARY"
+              echo "=== Binary info ==="
               file "$BINARY"
               lipo -info "$BINARY"
+              echo "=== Library dependencies ==="
+              otool -L "$BINARY"
+              echo "=== Bundle Frameworks ==="
+              ls "$APP/Contents/Frameworks/" 2>/dev/null || echo "No Frameworks dir"
+              echo "=== Verify SDL paths are bundle-relative ==="
+              if otool -L "$BINARY" | grep -q "@executable_path"; then
+                echo "✅ SDL paths are bundle-relative"
+              else
+                echo "❌ SDL paths are NOT bundle-relative - will fail on other machines"
+                otool -L "$BINARY" | grep -i sdl
+              fi
             fi
           fi
 
