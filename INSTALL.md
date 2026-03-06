@@ -124,8 +124,6 @@ git clone https://github.com/SethRobinson/proton.git
 git clone https://github.com/SethRobinson/RTDink.git
 ```
 
-
-
 2. Install **SDL2** and **SDL2_mixer** frameworks:
 
    **Option A — DMG frameworks** (recommended, works on all Macs, required for universal binary):
