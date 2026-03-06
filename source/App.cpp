@@ -242,7 +242,7 @@ const char * GetAppName()
 	return "Dink Smallwood HD";
 };
 
-#if defined(RTLINUX) || defined(PLATFORM_LINUX)
+#if defined(RTLINUX) || defined(PLATFORM_LINUX) || defined(PLATFORM_OSX)
 
 #include <SDL2/SDL.h>
 
@@ -277,6 +277,8 @@ void UpdateViewport(int width, int height) {
     glLoadIdentity();
 }
 
+
+#if defined(RTLINUX) || defined(PLATFORM_LINUX)
 // Linux: SDL owns the window - use SDL fullscreen toggle
 void OnFullscreenToggleRequestMultiplatform() {
     SDL_Window* window = GetSDLWindow();
@@ -305,8 +307,9 @@ void OnFullscreenToggleRequestMultiplatform() {
     SetupFakePrimaryScreenSize(1024, 768);
     UpdateViewport(width, height);
 }
+#endif // RTLINUX || PLATFORM_LINUX
 
-#elif defined(PLATFORM_OSX)
+#if defined(PLATFORM_OSX)
 
 // macOS: Cocoa owns the window - implemented in OSXUtils.mm (Objective-C++ required)
 void OSXToggleFullscreen();
