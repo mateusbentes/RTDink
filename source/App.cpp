@@ -46,7 +46,6 @@ void AddText(const char *tex, const char *filename);
 #endif
 
 #ifdef PLATFORM_OSX
-#import <Cocoa/Cocoa.h>
 bool g_bIsFullScreen = false;
 #else
 extern bool g_bIsFullScreen;
@@ -315,13 +314,8 @@ void App::OnFullscreenToggleRequest()
 #if defined(RTLINUX) || defined(PLATFORM_LINUX)
     OnFullscreenToggleRequestMultiplatform();
 #elif defined(PLATFORM_OSX)
-    // macOS Cocoa: use native fullscreen toggle (no SDL window involved)
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSWindow *window = [NSApp mainWindow];
-        [window toggleFullScreen:nil];
-        g_bIsFullScreen = !g_bIsFullScreen;
-        GetApp()->GetVar("fullscreen")->Set(uint32(g_bIsFullScreen));
-    });
+    // Implemented in OSXUtils.mm (Objective-C++ required for Cocoa calls)
+    OSXToggleFullscreen();
 #else
     BaseApp::OnFullscreenToggleRequest();
 #endif
