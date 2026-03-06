@@ -1187,7 +1187,14 @@ void App::OnScreenSizeChange()
 
 	UpdateTitleBar();
 
-#if defined(WINAPI) || defined(PLATFORM_OSX)
+#ifdef WINAPI
+	GetApp()->GetVar("fullscreen")->Set(uint32(g_bIsFullScreen));
+	GetApp()->GetVar("videox")->Set(uint32(GetPrimaryGLX()));
+	GetApp()->GetVar("videoy")->Set(uint32(GetPrimaryGLY()));
+#ifdef _DEBUG
+	LogMsg("Got OnScreenSizeChange:  Setting to %d, %d", uint32(GetPrimaryGLX()), uint32(GetPrimaryGLY()));
+#endif
+#elif defined(PLATFORM_OSX)
 	GetApp()->GetVar("fullscreen")->Set(uint32(g_bIsFullScreen));
 	GetApp()->GetVar("video_x")->Set(uint32(GetPrimaryGLX()));
 	GetApp()->GetVar("video_y")->Set(uint32(GetPrimaryGLY()));
@@ -1195,7 +1202,6 @@ void App::OnScreenSizeChange()
 	LogMsg("Got OnScreenSizeChange:  Setting to %d, %d", uint32(GetPrimaryGLX()), uint32(GetPrimaryGLY()));
 #endif
 #endif
-
 }
 
 void App::GetServerInfo( string &server, uint32 &port )
