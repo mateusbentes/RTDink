@@ -120,11 +120,11 @@ The Xcode project references `../../shared/` (relative to `OSX/`) to find the Pr
 1. Clone the Proton SDK and this repo as siblings:
 
 ```bash
-git clone https://github.com/mateusbentes/proton.git
-git clone https://github.com/mateusbentes/RTDink.git
+git clone https://github.com/SethRobinson/proton.git
+git clone https://github.com/SethRobinson/RTDink.git
 ```
 
-   > **Note:** This fork uses a patched Proton SDK (`mateusbentes/proton`) that includes macOS-specific fixes for window creation, resolution handling, and the app lifecycle. The upstream `SethRobinson/proton` does not include these changes.
+   > **Note (contributors):** If building from the `mateusbentes/RTDink` fork, use `https://github.com/mateusbentes/proton.git` instead of the upstream Proton SDK — it contains macOS-specific fixes for window creation, resolution handling, and the app lifecycle that have not yet been merged upstream.
 
 2. Install **SDL2** and **SDL2_mixer** frameworks:
 
