@@ -1,7 +1,7 @@
-name: Test macOS Universal Build
+name: macOS Universal Build (arm64 + x86_64)
 
-# This workflow only runs in YOUR fork
-# It won't affect Seth's repository
+# Contribution workflow — builds a universal macOS binary
+# Only runs in this fork, does not affect upstream repository
 
 on:
   workflow_dispatch:
