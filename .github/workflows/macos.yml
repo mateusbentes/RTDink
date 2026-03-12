@@ -1,0 +1,16 @@
+name: macOS
+
+on:
+  push:
+    branches: [ master, test_mac_arm64 ]
+  pull_request:
+
+jobs:
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Show Xcode version
+        run: xcodebuild -version
